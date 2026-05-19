@@ -5,6 +5,7 @@ import { toast } from "sonner";
 
 export function NexusFrame() {
   const { user, signOut } = useAuth();
+  const db = supabase as any;
   const ref = useRef<HTMLIFrameElement>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "syncing" | "saved">("loading");
   const lastSnapshot = useRef<string>("");
@@ -40,7 +41,7 @@ export function NexusFrame() {
       const json = JSON.stringify(snap);
       if (json === lastSnapshot.current) return;
       setStatus("syncing");
-      const { error } = await supabase
+      const { error } = await db
         .from("user_app_state")
         .upsert({ user_id: user.id, state: snap as any });
       if (error) throw error;
@@ -62,7 +63,7 @@ export function NexusFrame() {
     // First load (per user): hydrate from cloud, exactly once
     if (hydratedFor.current !== user.id) {
       hydratedFor.current = user.id;
-      const { data } = await supabase
+      const { data } = await db
         .from("user_app_state")
         .select("state")
         .eq("user_id", user.id)
@@ -72,7 +73,7 @@ export function NexusFrame() {
         ? Object.entries(remote).filter(([k]) => isAppKey(k))
         : [];
       if (isLegacyCfoSnapshot(remote)) {
-        await supabase.from("user_app_state").delete().eq("user_id", user.id);
+        await db.from("user_app_state").delete().eq("user_id", user.id);
         const ls = win.localStorage;
         const toRemove: string[] = [];
         for (let i = 0; i < ls.length; i++) {
@@ -158,7 +159,7 @@ export function NexusFrame() {
             iframeBusy.current = true;
             // Delete the row entirely; upsert empty is also fine, but delete
             // guarantees no leftover keys survive.
-            await supabase
+            await db
               .from("user_app_state")
               .delete()
               .eq("user_id", user.id);
