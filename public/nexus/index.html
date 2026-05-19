@@ -1,0 +1,2642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS STUDY — Universal</title>
+
+<!-- ─ DNS prefetch & preconnect for faster font loading ─ -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- ─ Google Fonts with font-display=swap for non-blocking ─ -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- ─ Preload main stylesheet for fastest possible first paint ─ -->
+<link rel="preload" href="css/nexus.css" as="style">
+<link rel="stylesheet" href="css/nexus.css">
+<link rel="stylesheet" href="css/questoes.css">
+
+</head>
+<body>
+
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     ONBOARDING OVERLAY — Diagnóstico Estratégico v7
+════════════════════════════════════════════════════════ -->
+<div id="ob-overlay" style="display:none;">
+  <div class="ob-orb o1"></div>
+  <div class="ob-orb o2"></div>
+  <div class="ob-bg-grid"></div>
+
+  <div class="ob-card">
+    <div class="ob-accent"></div>
+
+    <!-- Header (escondido na welcome) -->
+    <div class="ob-hdr" id="ob-hdr" style="display:none;">
+      <div class="ob-hdr-brand">
+        <div class="ob-hdr-logo">NX</div>
+        <div>
+          <div class="ob-hdr-title">OPERAÇÃO APROVAÇÃO</div>
+          <div class="ob-hdr-sub">Diagnóstico Estratégico</div>
+        </div>
+      </div>
+      <div class="ob-hdr-counter" id="ob-hdr-counter">ETAPA 1 DE 6</div>
+    </div>
+
+    <!-- Progress (escondido na welcome) -->
+    <div class="ob-prog-wrap" id="ob-prog-wrap" style="display:none;">
+      <div class="ob-prog-track">
+        <div class="ob-prog-fill" id="ob-prog-fill" style="width:0%"></div>
+      </div>
+      <div class="ob-dots" id="ob-dots">
+        <div class="ob-dot" data-n="1"></div>
+        <div class="ob-dot" data-n="2"></div>
+        <div class="ob-dot" data-n="3"></div>
+        <div class="ob-dot" data-n="4"></div>
+        <div class="ob-dot" data-n="5"></div>
+        <div class="ob-dot" data-n="6"></div>
+      </div>
+    </div>
+
+    <!-- Phase label -->
+    <div class="ob-phase" id="ob-phase" style="display:none;"></div>
+
+    <!-- Steps body -->
+    <div class="ob-body">
+
+      <!-- ══ STEP 0: WELCOME ══ -->
+      <div class="ob-welcome ob-active">
+        <div class="ob-welcome-logo">NX</div>
+        <div class="ob-welcome-eyebrow">Sistema de Diagnóstico Estratégico</div>
+        <h1 class="ob-welcome-title">NEXUS<br><span>STUDY</span></h1>
+        <p class="ob-welcome-desc">Em menos de 3 minutos, seu plano de ataque personalizado estará pronto. Cada resposta calibra cronograma, prioridades e estratégia.</p>
+        <div class="ob-welcome-feats">
+          <div class="ob-welcome-feat"><span class="ob-welcome-feat-icon">🎯</span>Diagnóstico de vulnerabilidades críticas</div>
+          <div class="ob-welcome-feat"><span class="ob-welcome-feat-icon">⚡</span>Plano adaptado a pré ou pós-edital</div>
+          <div class="ob-welcome-feat"><span class="ob-welcome-feat-icon">📊</span>Relatório de Missão gerado ao final</div>
+        </div>
+        <button class="ob-btn-start" onclick="Onboarding.goTo(1)">INICIAR DIAGNÓSTICO →</button>
+        <button class="ob-btn-skip-link" onclick="Onboarding.skip()">Pular e usar configuração padrão</button>
+      </div>
+
+      <!-- ══ STEP 1: CAMPO DE BATALHA ══ -->
+      <div class="ob-step" data-step="1">
+        <div class="ob-step-title"><em>ETAPA 1</em> — CAMPO DE BATALHA</div>
+        <p class="ob-step-desc">A <strong>banca</strong> é o dado mais estratégico desta etapa — ela determina absolutamente tudo na abordagem pedagógica.</p>
+
+        <div class="ob-field">
+          <label class="ob-label">Cargo / Carreira que você está disputando</label>
+          <input class="ob-input" id="ob-cargo" placeholder="Ex: Oficial PM, Delegado, Agente PRF, Escrivão PCDF..." autocomplete="off">
+        </div>
+
+        <div class="ob-field">
+          <label class="ob-label">Banca organizadora</label>
+          <div class="ob-banca-grid">
+            <div class="ob-banca-card ob-sel" data-banca="CESPE/CEBRASPE" onclick="Onboarding.selBanca(this)">
+              <div class="ob-banca-icon">⚖️</div><div class="ob-banca-name">CESPE</div>
+            </div>
+            <div class="ob-banca-card" data-banca="FCC" onclick="Onboarding.selBanca(this)">
+              <div class="ob-banca-icon">📋</div><div class="ob-banca-name">FCC</div>
+            </div>
+            <div class="ob-banca-card" data-banca="VUNESP" onclick="Onboarding.selBanca(this)">
+              <div class="ob-banca-icon">📐</div><div class="ob-banca-name">VUNESP</div>
+            </div>
+            <div class="ob-banca-card" data-banca="AOCP" onclick="Onboarding.selBanca(this)">
+              <div class="ob-banca-icon">📄</div><div class="ob-banca-name">AOCP</div>
+            </div>
+            <div class="ob-banca-card" data-banca="IBFC" onclick="Onboarding.selBanca(this)">
+              <div class="ob-banca-icon">🏛️</div><div class="ob-banca-name">IBFC</div>
+            </div>
+            <div class="ob-banca-card" data-banca="FGV" onclick="Onboarding.selBanca(this)">
+              <div class="ob-banca-icon">🎓</div><div class="ob-banca-name">FGV</div>
+            </div>
+            <div class="ob-banca-card" data-banca="QUADRIX" onclick="Onboarding.selBanca(this)">
+              <div class="ob-banca-icon">🔷</div><div class="ob-banca-name">QUADRIX</div>
+            </div>
+            <div class="ob-banca-card" data-banca="_outra" onclick="Onboarding.selBanca(this)">
+              <div class="ob-banca-icon">✏️</div><div class="ob-banca-name">Outra</div>
+            </div>
+          </div>
+          <div class="ob-cond" id="ob-banca-outro">
+            <input class="ob-input" id="ob-banca-outro-input" placeholder="Nome da banca..." style="margin-top:7px;">
+          </div>
+        </div>
+
+        <div class="ob-field">
+          <label class="ob-label">Data da prova</label>
+          <div class="ob-date-row">
+            <input class="ob-date-inp" id="ob-date" type="date" oninput="Onboarding.onDate()">
+            <div class="ob-date-or">OU</div>
+            <input class="ob-days-inp" id="ob-days" type="number" min="1" max="999" placeholder="dias" oninput="Onboarding.onDays()">
+          </div>
+          <div class="ob-date-hint" id="ob-date-hint"></div>
+        </div>
+      </div>
+
+      <!-- ══ STEP 2: PONTO DE SITUAÇÃO ══ -->
+      <div class="ob-step" data-step="2">
+        <div class="ob-step-title"><em>ETAPA 2</em> — PONTO DE SITUAÇÃO</div>
+        <p class="ob-step-desc">A pergunta mais importante do diagnóstico. Pré e pós-edital são realidades <strong>completamente diferentes</strong> de preparação.</p>
+
+        <div class="ob-field">
+          <label class="ob-label">Em que fase você está agora?</label>
+          <div class="ob-fase-grid">
+            <div class="ob-fase-card" data-fase="pos" style="--fc:var(--gold)" onclick="Onboarding.selFase(this)">
+              <span class="ob-fase-emoji">📋</span>
+              <div class="ob-fase-title">PÓS-EDITAL</div>
+              <div class="ob-fase-desc">O edital já foi publicado. Sei as matérias, os pesos e a data da prova.</div>
+              <span class="ob-fase-badge">Priorização extrema + reta final</span>
+            </div>
+            <div class="ob-fase-card" data-fase="pre" style="--fc:var(--blue)" onclick="Onboarding.selFase(this)">
+              <span class="ob-fase-emoji">🎯</span>
+              <div class="ob-fase-title">PRÉ-EDITAL</div>
+              <div class="ob-fase-desc">O edital ainda não saiu. Estudo matérias prováveis com base em concursos anteriores.</div>
+              <span class="ob-fase-badge">Base sólida + longo prazo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ob-divider"></div>
+
+        <div class="ob-field">
+          <label class="ob-label">Há quanto tempo estuda para concursos?</label>
+          <div class="ob-option-grid">
+            <div class="ob-option-card" data-exp="iniciante" onclick="Onboarding.selOpt(this,'exp')">
+              <span class="ob-option-ico">🌱</span>
+              <div class="ob-option-body"><div class="ob-option-title">Estou começando agora</div><div class="ob-option-desc">Menos de 3 meses de preparação</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+            <div class="ob-option-card" data-exp="intermediario" onclick="Onboarding.selOpt(this,'exp')">
+              <span class="ob-option-ico">📈</span>
+              <div class="ob-option-body"><div class="ob-option-title">Tenho alguma base</div><div class="ob-option-desc">3 meses a 1 ano de estudo</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+            <div class="ob-option-card" data-exp="veterano" onclick="Onboarding.selOpt(this,'exp')">
+              <span class="ob-option-ico">🔥</span>
+              <div class="ob-option-body"><div class="ob-option-title">Sou veterano</div><div class="ob-option-desc">Mais de 1 ano estudando</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+            <div class="ob-option-card" data-exp="reincidente" onclick="Onboarding.selOpt(this,'exp')">
+              <span class="ob-option-ico">🎖️</span>
+              <div class="ob-option-body"><div class="ob-option-title">Já fiz prova para essa carreira</div><div class="ob-option-desc">Tenho experiência real com este concurso</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Condicional pós-edital -->
+        <div class="ob-cond" id="ob-cond-q">
+          <div class="ob-divider"></div>
+          <div class="ob-field">
+            <label class="ob-label">Quantas questões já resolveu?</label>
+            <div class="ob-chips" id="ob-chips-q">
+              <button class="ob-chip" data-q="zero" onclick="Onboarding.selChip(this,'ob-chips-q');OB.onQ()">Ainda não comecei</button>
+              <button class="ob-chip" data-q="pouco" onclick="Onboarding.selChip(this,'ob-chips-q');OB.onQ()">Menos de 200</button>
+              <button class="ob-chip" data-q="regular" onclick="Onboarding.selChip(this,'ob-chips-q');OB.onQ()">200–1000</button>
+              <button class="ob-chip" data-q="intenso" onclick="Onboarding.selChip(this,'ob-chips-q');OB.onQ()">Mais de 1000</button>
+            </div>
+          </div>
+          <div class="ob-cond" id="ob-cond-taxa">
+            <div class="ob-field">
+              <label class="ob-label">Taxa de acertos média</label>
+              <div class="ob-taxa-grid">
+                <div class="ob-taxa-card" data-taxa="baixa" onclick="Onboarding.selTaxa(this)">
+                  <div class="ob-taxa-pct">↓ 40%</div><div class="ob-taxa-desc">Preciso urgente de revisão de conteúdo</div>
+                </div>
+                <div class="ob-taxa-card" data-taxa="media-baixa" onclick="Onboarding.selTaxa(this)">
+                  <div class="ob-taxa-pct">40–60%</div><div class="ob-taxa-desc">Tenho base, mas vacilo nas pegadinhas</div>
+                </div>
+                <div class="ob-taxa-card" data-taxa="media-alta" onclick="Onboarding.selTaxa(this)">
+                  <div class="ob-taxa-pct">60–75%</div><div class="ob-taxa-desc">Estou bem, preciso elevar o nível</div>
+                </div>
+                <div class="ob-taxa-card" data-taxa="alta" onclick="Onboarding.selTaxa(this)">
+                  <div class="ob-taxa-pct">↑ 75%</div><div class="ob-taxa-desc">No caminho certo — não errar o certo</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ STEP 3: CAPACIDADE OPERACIONAL ══ -->
+      <div class="ob-step" data-step="3">
+        <div class="ob-step-title"><em>ETAPA 3</em> — CAPACIDADE OPERACIONAL</div>
+        <p class="ob-step-desc">O maior erro dos planos de estudo é criar cronogramas impossíveis. <strong>Seja brutal aqui</strong> — 2h reais valem mais que 6h declaradas.</p>
+
+        <div class="ob-coach">
+          <span class="ob-coach-ico">💡</span>
+          <span class="ob-coach-txt">Conta só o tempo com foco total, sem celular, sem distração.</span>
+        </div>
+
+        <div class="ob-field">
+          <label class="ob-label">Sua situação atual</label>
+          <div class="ob-option-grid">
+            <div class="ob-option-card" data-job="integral" onclick="Onboarding.selOpt(this,'job')">
+              <span class="ob-option-ico">⚡</span>
+              <div class="ob-option-body"><div class="ob-option-title">Dedicação integral</div><div class="ob-option-desc">Não trabalho — estudo é a prioridade absoluta</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+            <div class="ob-option-card" data-job="parcial" onclick="Onboarding.selOpt(this,'job')">
+              <span class="ob-option-ico">⏰</span>
+              <div class="ob-option-body"><div class="ob-option-title">Trabalho parcial</div><div class="ob-option-desc">Até 6h de trabalho por dia</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+            <div class="ob-option-card" data-job="completo" onclick="Onboarding.selOpt(this,'job')">
+              <span class="ob-option-ico">🏢</span>
+              <div class="ob-option-body"><div class="ob-option-title">Trabalho em tempo integral</div><div class="ob-option-desc">6h+ por dia, janelas curtas para estudar</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+            <div class="ob-option-card" data-job="familiar" onclick="Onboarding.selOpt(this,'job')">
+              <span class="ob-option-ico">👨‍👩‍👧</span>
+              <div class="ob-option-body"><div class="ob-option-title">Responsabilidades familiares intensas</div><div class="ob-option-desc">Tempo fragmentado, filhos ou cuidados</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ob-field">
+          <label class="ob-label">Horas de estudo de ALTA QUALIDADE por dia</label>
+          <div class="ob-slider-wrap">
+            <input class="ob-slider" id="ob-hslider" type="range" min="1" max="10" value="4" step="0.5" oninput="Onboarding.onHours(this)">
+            <div class="ob-slider-ticks">
+              <span>1h</span><span>2h</span><span>3h</span><span>4h</span><span>5h</span><span>6h</span><span>7h</span><span>8h</span><span>9h</span><span>10h</span>
+            </div>
+            <div class="ob-slider-preview">
+              <div class="ob-slider-big" id="ob-h-big">4h</div>
+              <div class="ob-slider-texts">
+                <div class="ob-slider-main" id="ob-h-main">28h por semana</div>
+                <div class="ob-slider-sub" id="ob-h-sub">Configure a data para ver a projeção total.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ob-field">
+          <label class="ob-label">Melhor horário para matéria difícil</label>
+          <div class="ob-chips" id="ob-chips-turno">
+            <button class="ob-chip" data-t="madrugada" onclick="Onboarding.selChip(this,'ob-chips-turno')">🌙 Madrugada (4–7h)</button>
+            <button class="ob-chip" data-t="manha" onclick="Onboarding.selChip(this,'ob-chips-turno')">☀️ Manhã (7–12h)</button>
+            <button class="ob-chip" data-t="tarde" onclick="Onboarding.selChip(this,'ob-chips-turno')">🌤️ Tarde (12–18h)</button>
+            <button class="ob-chip ob-sel" data-t="noite" onclick="Onboarding.selChip(this,'ob-chips-turno')">🌙 Noite (18–23h)</button>
+            <button class="ob-chip" data-t="qualquer" onclick="Onboarding.selChip(this,'ob-chips-turno')">⚡ Qualquer</button>
+          </div>
+        </div>
+
+        <div class="ob-field">
+          <label class="ob-label">Fins de semana</label>
+          <div class="ob-chips" id="ob-chips-fds">
+            <button class="ob-chip ob-sel" data-f="muito" onclick="Onboarding.selChip(this,'ob-chips-fds')">✅ Estudo mais nos FDS</button>
+            <button class="ob-chip" data-f="pouco" onclick="Onboarding.selChip(this,'ob-chips-fds')">📉 Um pouco menos</button>
+            <button class="ob-chip" data-f="raramente" onclick="Onboarding.selChip(this,'ob-chips-fds')">🔴 Raramente</button>
+            <button class="ob-chip" data-f="nunca" onclick="Onboarding.selChip(this,'ob-chips-fds')">❌ Nunca</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ STEP 4: DIAGNÓSTICO DE CAMPO ══ -->
+      <div class="ob-step" data-step="4">
+        <div class="ob-step-title"><em>ETAPA 4</em> — DIAGNÓSTICO DE CAMPO</div>
+        <p class="ob-step-desc"><strong>Seja brutal aqui.</strong> Autoavaliação honesta agora vale mais do que otimismo na prova. Isso define onde cada hora do seu plano vai.</p>
+
+        <div class="ob-field">
+          <label class="ob-label">Avalie seu domínio real em cada grupo</label>
+          <div class="ob-matrix" id="ob-matrix"></div>
+        </div>
+
+        <div class="ob-field">
+          <label class="ob-label">Seu maior obstáculo hoje</label>
+          <div class="ob-option-grid">
+            <div class="ob-option-card" data-obst="conteudo" onclick="Onboarding.selOpt(this,'obst')">
+              <span class="ob-option-ico">📚</span>
+              <div class="ob-option-body"><div class="ob-option-title">Falta de conteúdo</div><div class="ob-option-desc">Não domino a matéria — precisio aprender</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+            <div class="ob-option-card" data-obst="disciplina" onclick="Onboarding.selOpt(this,'obst')">
+              <span class="ob-option-ico">🔄</span>
+              <div class="ob-option-body"><div class="ob-option-title">Falta de disciplina</div><div class="ob-option-desc">Sei que preciso, mas não consigo consistência</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+            <div class="ob-option-card" data-obst="metodo" onclick="Onboarding.selOpt(this,'obst')">
+              <span class="ob-option-ico">🧠</span>
+              <div class="ob-option-body"><div class="ob-option-title">Falta de método</div><div class="ob-option-desc">Estudo muito mas não retenho</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+            <div class="ob-option-card" data-obst="direcao" onclick="Onboarding.selOpt(this,'obst')">
+              <span class="ob-option-ico">🎯</span>
+              <div class="ob-option-body"><div class="ob-option-title">Falta de direção</div><div class="ob-option-desc">Não sei o que priorizar</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ STEP 5: CALIBRAÇÃO FINAL ══ -->
+      <div class="ob-step" data-step="5">
+        <div class="ob-step-title"><em>ETAPA 5</em> — CALIBRAÇÃO FINAL</div>
+        <p class="ob-step-desc">O sistema se adapta ao <strong>seu modo</strong> de aprender. Escolhas erradas aqui geram cronogramas que você abandona na semana 2.</p>
+
+        <div class="ob-field">
+          <label class="ob-label">Como você aprende melhor?</label>
+          <div class="ob-option-grid">
+            <div class="ob-option-card" data-met="questoes" onclick="Onboarding.selOpt(this,'met')">
+              <span class="ob-option-ico">🎯</span>
+              <div class="ob-option-body"><div class="ob-option-title">Questões primeiro</div><div class="ob-option-desc">Resolvo, erro, aprendo pelo erro</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+            <div class="ob-option-card" data-met="flashcards" onclick="Onboarding.selOpt(this,'met')">
+              <span class="ob-option-ico">🃏</span>
+              <div class="ob-option-body"><div class="ob-option-title">Flashcards e SM-2</div><div class="ob-option-desc">Memorização sistemática como centro do plano</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+            <div class="ob-option-card" data-met="leitura" onclick="Onboarding.selOpt(this,'met')">
+              <span class="ob-option-ico">📖</span>
+              <div class="ob-option-body"><div class="ob-option-title">Leitura ativa</div><div class="ob-option-desc">Leio, marco, resumo — teoria antes de praticar</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+            <div class="ob-option-card" data-met="misto" onclick="Onboarding.selOpt(this,'met')">
+              <span class="ob-option-ico">🔄</span>
+              <div class="ob-option-body"><div class="ob-option-title">Método misto</div><div class="ob-option-desc">Alterno conforme a matéria</div></div>
+              <div class="ob-option-radio"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ob-field">
+          <label class="ob-label">Intensidade de cobrança do sistema</label>
+          <div class="ob-intensity-grid">
+            <div class="ob-intensity-card" data-int="sustentavel" style="--ic:var(--green)" onclick="Onboarding.selIntensity(this)">
+              <span class="ob-intensity-emoji">🟢</span>
+              <div class="ob-intensity-name">SUSTENTÁVEL</div>
+              <div class="ob-intensity-desc">Metas conservadoras. Consistência acima de tudo.</div>
+            </div>
+            <div class="ob-intensity-card ob-sel" data-int="acelerado" style="--ic:var(--gold)" onclick="Onboarding.selIntensity(this)">
+              <span class="ob-intensity-emoji">🟡</span>
+              <div class="ob-intensity-name">ACELERADO</div>
+              <div class="ob-intensity-desc">Metas altas, alertas frequentes. Cobertura máxima.</div>
+            </div>
+            <div class="ob-intensity-card" data-int="guerra" style="--ic:var(--red)" onclick="Onboarding.selIntensity(this)">
+              <span class="ob-intensity-emoji">🔴</span>
+              <div class="ob-intensity-name">MODO GUERRA</div>
+              <div class="ob-intensity-desc">Máxima intensidade. Zero folga. Para pouco tempo.</div>
+            </div>
+          </div>
+          <div id="ob-int-hint" style="display:none;"></div>
+        </div>
+      </div>
+
+      <!-- ══ STEP 6: RELATÓRIO DE MISSÃO ══ -->
+      <div class="ob-step" data-step="6">
+        <div class="ob-step-title"><em>🎯</em> RELATÓRIO DE MISSÃO</div>
+        <p class="ob-step-desc">Diagnóstico gerado com base nas suas respostas. Revise e inicie sua operação.</p>
+        <div class="ob-report" id="ob-report"></div>
+      </div>
+
+    </div><!-- /ob-body -->
+
+    <!-- Nav footer (escondido na welcome) -->
+    <div class="ob-nav" id="ob-nav" style="display:none;">
+      <button class="ob-btn-back" id="ob-btn-back" style="display:none;" onclick="Onboarding.prev()">← Voltar</button>
+      <div class="ob-nav-spacer"></div>
+      <button class="ob-btn-next" id="ob-btn-next" onclick="Onboarding.next()">Próximo →</button>
+      <button class="ob-btn-finish" id="ob-btn-finish" style="display:none;" onclick="Onboarding.finish()">🚀 INICIAR OPERAÇÃO</button>
+    </div>
+
+  </div><!-- /ob-card -->
+</div><!-- /ob-overlay -->
+
+
+
+<!-- ════════════ AMBIENT BACKGROUND ════════════ -->
+<div class="bg-scene" aria-hidden="true">
+  <div class="bg-orb o1"></div>
+  <div class="bg-orb o2"></div>
+  <div class="bg-orb o3"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-vignette"></div>
+</div>
+
+<!-- ════════════ SIDEBAR ════════════ -->
+<nav class="sidebar" id="sidebar" onmouseenter="Sidebar.open()" onmouseleave="Sidebar.close()">
+
+  <div class="sb-brand">
+    <div class="sb-mark" id="sb-mark-text" title="Meu Concurso">NX</div>
+    <div class="sb-brand-text">
+      <div class="sb-name" id="sb-brand-name">NEXUS STUDY</div>
+      <div class="sb-tagline" id="sb-brand-tagline">Operação Aprovação</div>
+    </div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-label">PRINCIPAL</div>
+    <div class="nav-item active" id="nav-dashboard" onclick="Router.go('dashboard')">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Dashboard</div>
+    </div>
+    <!-- CRONOGRAMA OCULTO — para reexibir, remover o style="display:none" -->
+    <div class="nav-item" id="nav-schedule" onclick="Router.go('schedule')" style="display:none">
+      <div class="nav-icon">📅</div>
+      <div class="nav-label">Cronograma</div>
+    </div>
+    <div class="nav-item" id="nav-ciclo" onclick="Router.go('ciclo')">
+      <div class="nav-icon">♻️</div>
+      <div class="nav-label">Ciclo de Estudos</div>
+    </div>
+    <div class="nav-item" id="nav-curriculum" onclick="Router.go('curriculum')">
+      <div class="nav-icon">🔥</div>
+      <div class="nav-label">Edital</div>
+    </div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-label">FERRAMENTAS</div>
+    <div class="nav-item" id="nav-flashcards" onclick="Router.go('flashcards')">
+      <div class="nav-icon">🃏</div>
+      <div class="nav-label">Flashcards</div>
+      <div class="nav-badge" id="badge-flashcards"></div>
+    </div>
+    <div class="nav-item" id="nav-errors" onclick="Router.go('errors')">
+      <div class="nav-icon">✏️</div>
+      <div class="nav-label">Caderno de Erros</div>
+      <div class="nav-badge" id="badge-errors"></div>
+    </div>
+    <div class="nav-item" id="nav-questoes" onclick="Router.go('questoes')">
+      <div class="nav-icon">📚</div>
+      <div class="nav-label">Questões</div>
+      <div class="nav-badge" id="badge-questoes"></div>
+    </div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-label">ANÁLISE</div>
+    <div class="nav-item" id="nav-revisoes" onclick="Router.go('revisoes')">
+      <div class="nav-icon">🔁</div>
+      <div class="nav-label">Revisões</div>
+      <div class="nav-badge" id="badge-revisoes"></div>
+    </div>
+    <div class="nav-item" id="nav-analysis" onclick="Router.go('analysis')">
+      <div class="nav-icon">🎯</div>
+      <div class="nav-label">DNA da Banca</div>
+    </div>
+  </div>
+
+  <div class="sb-footer">
+    <div class="sb-countdown">
+      <div class="sb-cd-icon">⏳</div>
+      <div class="sb-cd-text">
+        <div class="sb-cd-num" id="sb-days">—</div>
+        <div class="sb-cd-label">dias p/ prova</div>
+      </div>
+    </div>
+    <!-- LOGOUT BUTTON -->
+    <div class="nav-item" id="nav-logout" onclick="window.parent.postMessage({type:'nexus:logout'}, '*')" title="Sair da conta" style="margin-top:6px;border-color:rgba(232,184,75,0.18);">
+      <div class="nav-icon" style="background:rgba(232,184,75,0.08);border-color:rgba(232,184,75,0.25);font-size:13px;">⎋</div>
+      <div class="nav-label" style="color:var(--gold,#E8B84B);font-size:12px;">Deslogar</div>
+    </div>
+  </div>
+
+</nav>
+
+<!-- ════════════ MAIN ════════════ -->
+<div class="main" id="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-info">
+      <div class="topbar-page" id="topbar-title">NEXUS STUDY</div>
+      <div class="topbar-sub"  id="topbar-sub">Visão geral da preparação</div>
+    </div>
+
+    <!-- Cronômetro ativo — único indicador de sessão -->
+    <button class="topbar-timer idle" id="topbar-timer-btn" onclick="StudyTimer.openFullscreen()" title="Abrir cronômetro">
+      <div class="topbar-timer-dot" id="topbar-timer-dot"></div>
+      <span class="topbar-timer-label" id="topbar-timer-label">Iniciar Estudo</span>
+    </button>
+
+    <!-- Adicionar Estudo -->
+    <button class="topbar-add-study" onclick="StudyTimer.openRegistroManual()">
+      <div class="topbar-add-study-icon">+</div>
+      Adicionar Estudo
+    </button>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="ThemeEngine.toggle()" title="Alternar tema">
+      <span class="tt-icon-dark">🌙</span>
+      <span class="tt-icon-light">☀️</span>
+    </button>
+
+    <!-- Config único -->
+    <button class="topbar-cfg-btn" onclick="ConfigPanel.open()" id="topbar-cfg-btn">
+      <span>⚙</span> Configurações
+    </button>
+  </header>
+
+  <!-- CONFIG DRAWER -->
+  <div class="cfg-backdrop" id="cfg-backdrop" onclick="ConfigPanel.close()"></div>
+  <div class="cfg-drawer" id="cfg-drawer">
+
+    <div class="cfg-drawer-header">
+      <div class="cfg-drawer-icon">⚙</div>
+      <div class="cfg-drawer-title">CONFIGURAÇÕES</div>
+      <button class="cfg-drawer-close" onclick="ConfigPanel.close()">✕</button>
+    </div>
+
+    <div class="cfg-drawer-tabs" id="cfg-tabs">
+      <button class="cfg-drawer-tab active" data-tab="concurso" onclick="ConfigPanel.switchTab('concurso',this)">
+        <span>🎯</span>Concurso
+      </button>
+      <button class="cfg-drawer-tab" data-tab="metas" onclick="ConfigPanel.switchTab('metas',this)">
+        <span>📊</span>Metas
+      </button>
+      <button class="cfg-drawer-tab" data-tab="ia" onclick="ConfigPanel.switchTab('ia',this)">
+        <span>🤖</span>IA
+      </button>
+      <button class="cfg-drawer-tab" data-tab="dados" onclick="ConfigPanel.switchTab('dados',this)">
+        <span>💾</span>Dados
+      </button>
+    </div>
+
+    <div class="cfg-drawer-body">
+
+      <!-- ─── TAB: Concurso ─── -->
+      <div class="cfg-tab-panel active" id="cfg-tab-concurso">
+        <div class="cfg-section">
+          <div class="cfg-section-title">📋 Informações do Certame</div>
+          <div class="cfg-field">
+            <label>Nome do Concurso *</label>
+            <input class="cfg-input" id="cfg2-name" type="text" placeholder="Ex: TRT, Receita Federal, Prefeitura...">
+          </div>
+          <div class="cfg-input-row">
+            <div class="cfg-field">
+              <label>Banca Organizadora</label>
+              <input class="cfg-input" id="cfg2-board" type="text" placeholder="CESPE, FCC, FGV...">
+            </div>
+            <div class="cfg-field">
+              <label>Data da Prova</label>
+              <input class="cfg-input" id="cfg2-date" type="date" oninput="ConfigPanel.onDateChange()">
+            </div>
+          </div>
+          <div class="cfg-input-row">
+            <div class="cfg-field">
+              <label>Início dos Estudos</label>
+              <input class="cfg-input" id="cfg2-start" type="date">
+            </div>
+            <div class="cfg-field">
+              <label>Total de Dias</label>
+              <input class="cfg-input" id="cfg2-days" type="number" min="5" max="730" placeholder="Ex: 90">
+            </div>
+          </div>
+          <div id="cfg2-days-preview" style="font-size:11px;color:var(--text-muted);margin-top:-4px;line-height:1.5;min-height:16px"></div>
+        </div>
+
+        <div class="cfg-section">
+          <div class="cfg-section-title">⚡ Modo de Intensidade</div>
+          <div class="cfg-intensity-grid">
+            <div class="cfg-intensity-card" data-intensity="tranquilo" onclick="ConfigPanel.setIntensity('tranquilo',this)">
+              <div class="cfg-intensity-icon">🌱</div>
+              <div class="cfg-intensity-name">Tranquilo</div>
+              <div class="cfg-intensity-desc">+60 dias · Ritmo regular</div>
+            </div>
+            <div class="cfg-intensity-card active" data-intensity="normal" onclick="ConfigPanel.setIntensity('normal',this)">
+              <div class="cfg-intensity-icon">⚡</div>
+              <div class="cfg-intensity-name">Normal</div>
+              <div class="cfg-intensity-desc">20–60 dias · Foco total</div>
+            </div>
+            <div class="cfg-intensity-card" data-intensity="intensivo" onclick="ConfigPanel.setIntensity('intensivo',this)">
+              <div class="cfg-intensity-icon">🔥</div>
+              <div class="cfg-intensity-name">Intensivo</div>
+              <div class="cfg-intensity-desc">&lt;20 dias · Máximo esforço</div>
+            </div>
+          </div>
+          <div id="cfg2-intensity-hint" style="font-size:10px;color:var(--text-dim);margin-top:8px;line-height:1.5"></div>
+        </div>
+      </div>
+
+      <!-- ─── TAB: Metas ─── -->
+      <div class="cfg-tab-panel" id="cfg-tab-metas">
+        <div class="cfg-section">
+          <div class="cfg-section-title">🎯 Metas Semanais</div>
+          <div class="cfg-goals-grid">
+            <div class="cfg-goal-item">
+              <div class="cfg-goal-icon">⏱</div>
+              <div class="cfg-goal-label">Horas por semana</div>
+              <input class="cfg-goal-input" id="cfg2-horas-meta" type="number" min="1" max="100" value="20">
+              <div class="cfg-goal-unit">horas / semana</div>
+            </div>
+            <div class="cfg-goal-item">
+              <div class="cfg-goal-icon">📝</div>
+              <div class="cfg-goal-label">Questões por semana</div>
+              <input class="cfg-goal-input" id="cfg2-questoes-meta" type="number" min="10" max="2000" value="300">
+              <div class="cfg-goal-unit">questões / semana</div>
+            </div>
+            <div class="cfg-goal-item">
+              <div class="cfg-goal-icon">📅</div>
+              <div class="cfg-goal-label">Dias de estudo</div>
+              <input class="cfg-goal-input" id="cfg2-dias-semana" type="number" min="1" max="7" value="5">
+              <div class="cfg-goal-unit">dias / semana</div>
+            </div>
+            <div class="cfg-goal-item">
+              <div class="cfg-goal-icon">⌚</div>
+              <div class="cfg-goal-label">Horas por dia</div>
+              <input class="cfg-goal-input" id="cfg2-horas-dia" type="number" min="0.5" max="16" step="0.5" value="4">
+              <div class="cfg-goal-unit">horas / dia</div>
+            </div>
+          </div>
+        </div>
+        <div class="cfg-section">
+          <div class="cfg-section-title">🌅 Turno Preferido</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button class="cfg-intensity-card" data-turno="manha" onclick="ConfigPanel.setTurno('manha',this)" style="flex:1;min-width:80px">
+              <div style="font-size:18px">🌅</div>
+              <div class="cfg-intensity-name">Manhã</div>
+            </button>
+            <button class="cfg-intensity-card" data-turno="tarde" onclick="ConfigPanel.setTurno('tarde',this)" style="flex:1;min-width:80px">
+              <div style="font-size:18px">☀️</div>
+              <div class="cfg-intensity-name">Tarde</div>
+            </button>
+            <button class="cfg-intensity-card" data-turno="noite" onclick="ConfigPanel.setTurno('noite',this)" style="flex:1;min-width:80px">
+              <div style="font-size:18px">🌙</div>
+              <div class="cfg-intensity-name">Noite</div>
+            </button>
+            <button class="cfg-intensity-card active" data-turno="integral" onclick="ConfigPanel.setTurno('integral',this)" style="flex:1;min-width:80px">
+              <div style="font-size:18px">⚡</div>
+              <div class="cfg-intensity-name">Integral</div>
+            </button>
+          </div>
+        </div>
+        <div id="cfg2-meta-preview" style="background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:12px;font-size:11px;color:var(--text-muted);line-height:1.7"></div>
+      </div>
+
+      <!-- ─── TAB: IA ─── -->
+      <div class="cfg-tab-panel" id="cfg-tab-ia">
+        <div class="cfg-section">
+          <div class="cfg-section-title">🔑 Chave de API Anthropic</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:12px;line-height:1.6">
+            Configurada aqui uma vez, usada em todos os módulos: geração de cronograma, extração de edital e flashcards com IA.
+          </div>
+          <div class="cfg-field">
+            <label>API Key <a href="https://console.anthropic.com/settings/keys" target="_blank" class="cfg-api-link">→ Obter chave gratuita</a></label>
+            <div class="cfg-api-wrap">
+              <input class="cfg-input" id="cfg2-api-key" type="password" placeholder="sk-ant-api03-..."
+                     autocomplete="off" oninput="ConfigPanel.onApiKeyInput(this.value)"
+                     style="padding-right:80px">
+              <span class="cfg-api-status" id="cfg2-api-status"></span>
+            </div>
+            <div class="cfg-api-hint">🔒 Salva apenas no seu navegador. Nunca enviada a terceiros.</div>
+          </div>
+          <div id="cfg2-api-test-result" style="display:none;padding:10px 12px;border-radius:8px;font-size:11px;margin-top:8px;line-height:1.5"></div>
+          <button style="width:100%;margin-top:8px;padding:9px;border-radius:var(--r-sm);border:1px solid var(--border-strong);background:transparent;color:var(--text-muted);font-size:11px;font-weight:700;cursor:pointer;transition:all 0.15s"
+                  onmouseover="this.style.borderColor='var(--blue)';this.style.color='var(--blue)'"
+                  onmouseout="this.style.borderColor='var(--border-strong)';this.style.color='var(--text-muted)'"
+                  onclick="ConfigPanel.testApiKey()">
+            🧪 Testar conexão com a API
+          </button>
+        </div>
+        <div class="cfg-section">
+          <div class="cfg-section-title">🤖 Módulos que usam IA</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:8px;font-size:11px;color:var(--text-muted)">📋 Extração de Edital — lê PDF e extrai disciplinas + prioridades</div>
+            <div style="display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:8px;font-size:11px;color:var(--text-muted)">📅 Gerador de Cronograma — cria plano de estudos personalizado</div>
+            <div style="display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:8px;font-size:11px;color:var(--text-muted)">🃏 Gerador de Flashcards — cria cards com destaques por matéria</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── TAB: Dados ─── -->
+      <div class="cfg-tab-panel" id="cfg-tab-dados">
+        <div class="cfg-section">
+          <div class="cfg-section-title">💾 Backup & Restore</div>
+          <div class="cfg-backup-card">
+            <div class="cfg-backup-icon">📤</div>
+            <div class="cfg-backup-info">
+              <div class="cfg-backup-title">Exportar todos os dados</div>
+              <div class="cfg-backup-sub">Salva sessões, flashcards, edital, erros, cronograma e configurações em um arquivo JSON.</div>
+            </div>
+            <button class="cfg-backup-btn" onclick="ConfigPanel.exportData()">Exportar</button>
+          </div>
+          <div class="cfg-backup-card">
+            <div class="cfg-backup-icon">📥</div>
+            <div class="cfg-backup-info">
+              <div class="cfg-backup-title">Importar backup</div>
+              <div class="cfg-backup-sub">Restaura todos os dados a partir de um arquivo JSON exportado anteriormente.</div>
+            </div>
+            <button class="cfg-backup-btn" onclick="document.getElementById('cfg2-import-file').click()">Importar</button>
+            <input type="file" id="cfg2-import-file" accept=".json" style="display:none" onchange="ConfigPanel.importData(event)">
+          </div>
+          <div id="cfg2-import-result" style="display:none;padding:10px 12px;border-radius:8px;font-size:11px;margin-top:4px;line-height:1.5"></div>
+        </div>
+        <div class="cfg-section">
+          <div class="cfg-section-title">🛠 Manutenção</div>
+          <div class="cfg-backup-card">
+            <div class="cfg-backup-icon">🗑</div>
+            <div class="cfg-backup-info">
+              <div class="cfg-backup-title">Limpar Cache</div>
+              <div class="cfg-backup-sub">Remove dados temporários. Sessões, flashcards e edital são preservados.</div>
+            </div>
+            <button class="cfg-backup-btn danger" onclick="ConfigPanel.clearCache()">Limpar</button>
+          </div>
+          <div class="cfg-backup-card">
+            <div class="cfg-backup-icon">🔄</div>
+            <div class="cfg-backup-info">
+              <div class="cfg-backup-title">Novo Concurso</div>
+              <div class="cfg-backup-sub">Reseta todos os dados e inicia o fluxo de configuração do zero.</div>
+            </div>
+            <button class="cfg-backup-btn danger" onclick="NexusReset.show()">Resetar</button>
+          </div>
+        </div>
+        <div id="cfg2-storage-info" style="font-size:10px;color:var(--text-dim);text-align:center;margin-top:8px"></div>
+      </div>
+
+    </div><!-- /cfg-drawer-body -->
+
+    <div class="cfg-drawer-footer">
+      <button class="cfg-cancel-btn" onclick="ConfigPanel.close()">Cancelar</button>
+      <button class="cfg-save-btn" onclick="ConfigPanel.save()">💾 SALVAR</button>
+    </div>
+
+  </div><!-- /cfg-drawer -->
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- ═══════════════════ VIEW: DASHBOARD ═══════════════════ -->
+
+
+
+    <div class="view active" id="view-dashboard">
+
+      <!-- Edital CTA banner -->
+      <div class="edital-cta-banner" id="edital-dashboard-cta" style="display:none"
+           onclick="Router.go('curriculum')">
+        <span class="edital-cta-banner-icon">📋</span>
+        <div class="edital-cta-banner-text">
+          <strong>Configure seu Edital para ativar o plano personalizado</strong>
+          <span>Adicione disciplinas, tópicos e data da prova → cronograma e metas gerados automaticamente</span>
+        </div>
+        <span class="edital-cta-banner-arrow">→</span>
+      </div>
+
+      <!-- Dynamic content injected by Render.dashboard() -->
+      <div id="dash-dynamic"></div>
+
+      <!-- Static sections that are populated by StudyTimer -->
+      <div id="dash-static-sections"></div>
+
+    </div>
+
+    <!-- ═══════════════════ VIEW: SCHEDULE ═══════════════════ -->
+    <div class="view" id="view-schedule">
+      <div class="section-header mb-4">
+        <div class="section-title">Cronograma de Estudos</div>
+        <div class="section-rule"></div>
+        <div class="section-badge" id="sch-mode-badge" style="display:none"></div>
+      </div>
+
+      <!-- ── EMPTY STATE ── -->
+      <div class="sch-empty-state" id="sch-empty-state">
+        <div class="sch-empty-graphic">🗓️</div>
+        <div class="sch-empty-title">Monte seu cronograma de estudos</div>
+        <p class="sch-empty-desc">
+          Gere um plano com IA a partir do seu perfil ou crie manualmente, bloco a bloco.
+        </p>
+        <div class="sch-mode-grid">
+          <button class="sch-mode-btn sch-mode-ai" onclick="ScheduleEngine.openAIModal()">
+            <div class="sch-mode-icon">🤖</div>
+            <div class="sch-mode-text">
+              <strong>Gerar com IA</strong>
+              <span>Plano inteligente gerado pelo Claude com base no seu perfil</span>
+            </div>
+          </button>
+          <button class="sch-mode-btn sch-mode-manual" onclick="ScheduleEngine.openManualEditor()">
+            <div class="sch-mode-icon">✏️</div>
+            <div class="sch-mode-text">
+              <strong>Criar Manual</strong>
+              <span>Monte seu próprio plano bloco a bloco, no seu ritmo</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── LOADING STATE ── -->
+      <div class="sch-loading-state" id="sch-loading-state" style="display:none">
+        <div class="sch-loading-header">
+          <div class="sch-loading-pulse">🤖</div>
+          <div>
+            <div class="sch-loading-title">GERANDO SEU CRONOGRAMA...</div>
+            <div class="sch-loading-msg" id="sch-loading-msg">Iniciando análise...</div>
+          </div>
+        </div>
+        <div class="sch-loading-steps" id="sch-loading-steps">
+          <div class="sch-loading-step" data-step="0"><div class="sch-ls-dot"></div>Analisando perfil e disciplinas</div>
+          <div class="sch-loading-step" data-step="1"><div class="sch-ls-dot"></div>Planejando distribuição de matérias</div>
+          <div class="sch-loading-step" data-step="2"><div class="sch-ls-dot"></div>Criando blocos e sessões de estudo</div>
+          <div class="sch-loading-step" data-step="3"><div class="sch-ls-dot"></div>Montando estratégia de revisões</div>
+          <div class="sch-loading-step" data-step="4"><div class="sch-ls-dot"></div>Finalizando cronograma personalizado</div>
+        </div>
+        <div class="sch-skeleton-grid">
+          <div class="sch-skeleton-card"></div>
+          <div class="sch-skeleton-card"></div>
+          <div class="sch-skeleton-card"></div>
+          <div class="sch-skeleton-card" style="animation-delay:0.2s"></div>
+        </div>
+      </div>
+
+      <!-- ── SCHEDULE VIEW ── -->
+      <div id="sch-view" style="display:none">
+        <!-- ── Matéria Filter Strip ── -->
+        <div class="sch-filter-strip" id="sch-filter-strip">
+          <span class="sch-filter-label">Filtrar por matéria</span>
+          <select class="sch-filter-select" id="sch-filter-select"
+                  onchange="ScheduleEngine.setFilter(this.value||null)">
+            <option value="">Todas as matérias</option>
+          </select>
+          <span class="sch-filter-match-count" id="sch-filter-match-count"></span>
+        </div>
+
+        <div class="sch-view-toolbar">
+          <div class="sch-phase-tabs" id="sch-phase-tabs"></div>
+          <div class="sch-toolbar-btns">
+            <button class="sch-btn-secondary" onclick="ScheduleEngine.openAIModal()">🔄 Regenerar</button>
+            <button class="sch-btn-secondary" onclick="ScheduleEngine.openManualEditor()">✏️ Manual</button>
+            <button class="sch-btn-danger" onclick="ScheduleEngine.clearSchedule()">✕ Limpar</button>
+          </div>
+        </div>
+        <div class="sch-phase-strip" id="sch-phase-strip"></div>
+        <div class="sch-day-grid" id="sch-day-grid"></div>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════ VIEW: CICLO DE ESTUDOS ═══════════════════ -->
+    <div class="view" id="view-ciclo">
+      <div id="ciclo-root"></div>
+    </div>
+
+    <!-- ═══════════════════ VIEW: CURRICULUM / EDITAL ═══════════════════ -->
+    <div class="view" id="view-curriculum">
+
+      <!-- ① EMPTY STATE — premium hero -->
+      <div class="edital-empty" id="edital-empty">
+        <div class="cad-hero" style="margin-bottom:20px">
+          <div>
+            <div class="cad-hero-eyebrow">FERRAMENTA · MAPA DE ESTUDO</div>
+            <h1 class="cad-hero-title">EDITAL COMPLETO</h1>
+            <p class="cad-hero-sub">Configure seu edital para ativar o cronograma inteligente, as metas do dashboard e a análise personalizada de desempenho.</p>
+          </div>
+          <button class="cad-cta" onclick="EditalEngine.openForm()">
+            <span class="cad-cta-plus">+</span> CONFIGURAR EDITAL
+          </button>
+        </div>
+        <div class="edital-empty-features" style="margin-top:8px">
+          <span class="edital-empty-feat">🤖 Upload de PDF com extração por IA</span>
+          <span class="edital-empty-feat">📚 Disciplinas com tópicos e pesos</span>
+          <span class="edital-empty-feat">📅 Cronograma automático</span>
+          <span class="edital-empty-feat">📊 Dashboard em tempo real</span>
+        </div>
+      </div>
+
+      <!-- ② FORM VIEW -->
+      <div class="edital-form-view" id="edital-form-view">
+
+        <div class="edital-form-topbar">
+          <div>
+            <div class="edital-form-title">⚙ CONFIGURAR EDITAL</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Preencha os dados do seu concurso e disciplinas</div>
+          </div>
+          <div class="edital-form-actions">
+            <button class="sch-btn-secondary" onclick="EditalEngine.cancelForm()">Cancelar</button>
+            <button class="sch-btn-primary"   onclick="EditalEngine.saveEdital()">💾 Salvar Edital</button>
+          </div>
+        </div>
+
+        <!-- SEÇÃO 1: Concurso -->
+        <div class="edital-section">
+          <div class="edital-section-header">
+            <div class="edital-section-icon gold">🎯</div>
+            <div>
+              <div class="edital-section-label">CONCURSO</div>
+              <div class="edital-section-sub">Informações básicas do seu certame</div>
+            </div>
+          </div>
+          <div class="edital-section-body">
+            <div class="ef-row-2">
+              <div class="ef-field">
+                <label>Nome do Concurso *</label>
+                <input id="ef-exam-nome" type="text" placeholder="Ex: Analista TRF, Receita Federal...">
+              </div>
+              <div class="ef-field">
+                <label>Banca Organizadora</label>
+                <select id="ef-banca">
+                  <option value="">Selecione...</option>
+                  <option>CESPE / CEBRASPE</option>
+                  <option>FCC</option>
+                  <option>FGV</option>
+                  <option>VUNESP</option>
+                  <option>IADES</option>
+                  <option>IBFC</option>
+                  <option>QUADRIX</option>
+                  <option>FEPESE</option>
+                  <option>AOCP</option>
+                  <option>Outra</option>
+                </select>
+              </div>
+            </div>
+            <div class="ef-row-3">
+              <div class="ef-field">
+                <label>Situação</label>
+                <select id="ef-situacao">
+                  <option value="pre-edital">Pré-edital</option>
+                  <option value="pos-edital">Pós-edital</option>
+                  <option value="inscrito">Inscrito</option>
+                  <option value="revisao">Revisão final</option>
+                </select>
+              </div>
+              <div class="ef-field">
+                <label>Data da Prova</label>
+                <input id="ef-data-prova" type="date" oninput="EditalEngine.calcDays()">
+                <div class="ef-days-preview" id="ef-days-preview"></div>
+              </div>
+              <div class="ef-field">
+                <label>Objetivo</label>
+                <select id="ef-objetivo">
+                  <option value="aprovacao">✅ Aprovação</option>
+                  <option value="alta-colocacao">🏆 Alta Colocação</option>
+                  <option value="top10">🥇 Top 10</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEÇÃO 2: Disponibilidade -->
+        <div class="edital-section">
+          <div class="edital-section-header">
+            <div class="edital-section-icon blue">⏰</div>
+            <div>
+              <div class="edital-section-label">DISPONIBILIDADE</div>
+              <div class="edital-section-sub">Quanto tempo você tem para estudar?</div>
+            </div>
+          </div>
+          <div class="edital-section-body">
+            <div class="ef-row-3">
+              <div class="ef-field">
+                <label>Horas por dia</label>
+                <select id="ef-horas">
+                  <option value="1">1 hora</option>
+                  <option value="2">2 horas</option>
+                  <option value="3">3 horas</option>
+                  <option value="4" selected>4 horas</option>
+                  <option value="5">5 horas</option>
+                  <option value="6">6 horas</option>
+                  <option value="8">8 horas</option>
+                  <option value="10">10+ horas</option>
+                </select>
+              </div>
+              <div class="ef-field">
+                <label>Dias por semana</label>
+                <select id="ef-dias-semana">
+                  <option value="3">3 dias</option>
+                  <option value="4">4 dias</option>
+                  <option value="5" selected>5 dias</option>
+                  <option value="6">6 dias</option>
+                  <option value="7">7 dias</option>
+                </select>
+              </div>
+              <div class="ef-field">
+                <label>Nível atual</label>
+                <select id="ef-nivel">
+                  <option value="iniciante">🌱 Iniciante</option>
+                  <option value="intermediario" selected>📈 Intermediário</option>
+                  <option value="avancado">🔥 Avançado</option>
+                </select>
+              </div>
+            </div>
+            <div class="ef-field">
+              <label>Turno preferido</label>
+              <div class="ef-chips" id="ef-turno-chips">
+                <button class="ef-chip" data-val="manha"    onclick="EditalEngine.selectTurno(this)">🌅 Manhã</button>
+                <button class="ef-chip" data-val="tarde"    onclick="EditalEngine.selectTurno(this)">☀️ Tarde</button>
+                <button class="ef-chip" data-val="noite"    onclick="EditalEngine.selectTurno(this)">🌙 Noite</button>
+                <button class="ef-chip active" data-val="integral" onclick="EditalEngine.selectTurno(this)">⚡ Integral</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEÇÃO 3: Disciplinas com PDF + IA -->
+        <div class="edital-section">
+          <div class="edital-section-header">
+            <div class="edital-section-icon green">📚</div>
+            <div>
+              <div class="edital-section-label">DISCIPLINAS & TÓPICOS</div>
+              <div class="edital-section-sub">Importe via PDF ou adicione manualmente</div>
+            </div>
+          </div>
+          <div class="edital-section-body">
+
+            <!-- PDF Upload + IA -->
+            <div class="ef-pdf-api-row">
+              <div class="ef-field">
+                <label>Chave API Anthropic <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:var(--gold);font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;margin-left:6px">→ obter chave</a></label>
+                <input id="ef-api-key" type="password" placeholder="sk-ant-..." autocomplete="off"
+                       oninput="EditalEngine.saveApiKey(this.value)">
+              </div>
+            </div>
+
+            <div class="ef-pdf-zone" id="ef-pdf-zone">
+              <input type="file" accept=".pdf" id="ef-pdf-input" onchange="EditalEngine.onPdfSelect(event)">
+              <div class="ef-pdf-icon">📄</div>
+              <div class="ef-pdf-title">Arraste o PDF do edital ou clique para selecionar</div>
+              <div class="ef-pdf-sub">A IA extrai todas as disciplinas, tópicos e já atribui prioridade por padrão da banca</div>
+              <div class="ef-pdf-file-name" id="ef-pdf-filename"></div>
+            </div>
+
+            <button class="ef-btn-ai" id="ef-ai-btn" onclick="EditalEngine.extractFromPDF()" style="width:100%;margin-bottom:12px" disabled>
+              🤖 Extrair + Priorizar com IA (2 passos)
+            </button>
+
+            <div class="ef-ai-status" id="ef-ai-status"></div>
+
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+              <div style="flex:1;height:1px;background:var(--border-subtle)"></div>
+              <span style="font-size:11px;color:var(--text-dim);white-space:nowrap">ou adicione manualmente</span>
+              <div style="flex:1;height:1px;background:var(--border-subtle)"></div>
+            </div>
+
+            <!-- Manual add -->
+            <div class="ef-disc-add-row">
+              <div class="ef-field" style="margin-bottom:0">
+                <label>Nome da disciplina</label>
+                <input id="ef-disc-nome" type="text" placeholder="Ex: Direito Constitucional..."
+                       onkeydown="if(event.key==='Enter'){EditalEngine.addDisc();event.preventDefault()}" autocomplete="off">
+              </div>
+              <div class="ef-field" style="margin-bottom:0">
+                <label>Peso</label>
+                <select id="ef-disc-peso">
+                  <option value="alta">🔥 Alta</option>
+                  <option value="media" selected>⚡ Média</option>
+                  <option value="baixa">📘 Baixa</option>
+                </select>
+              </div>
+              <button class="ef-btn-add" onclick="EditalEngine.addDisc()">+ Add</button>
+            </div>
+
+            <div class="ef-disc-cards" id="ef-disc-cards">
+              <div style="font-size:12px;color:var(--text-dim);text-align:center;padding:20px;font-style:italic">
+                Nenhuma disciplina adicionada ainda.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /edital-form-view -->
+
+      <!-- ③ CONFIGURED VIEW — PREMIUM (matches Caderno de Erros) -->
+      <div class="edital-configured-view" id="edital-configured-view" style="display:none">
+
+        <!-- ── HERO ── -->
+        <div class="cad-hero">
+          <div>
+            <div class="cad-hero-eyebrow" id="edital-hero-eyebrow">FERRAMENTA · MAPA DE ESTUDO</div>
+            <h1 class="cad-hero-title" id="edital-conf-title">EDITAL COMPLETO</h1>
+            <p class="cad-hero-sub" id="edital-info-band">Disciplinas, tópicos e prioridades do seu edital. Estude com inteligência.</p>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-shrink:0">
+            <button class="edcv-btn edcv-btn-ghost" onclick="EditalEngine.openForm()">✎ Editar</button>
+            <button class="edcv-btn edcv-btn-danger" onclick="EditalEngine.clearEdital()">✕ Limpar</button>
+          </div>
+        </div>
+
+        <!-- ── STATS premium ── -->
+        <div class="cad-stats" id="edcv-stats-bar"></div>
+
+        <!-- ── MAIN (full width, no sidebar) ── -->
+        <div class="cad-shell cad-shell--full">
+          <div class="cad-main">
+
+            <!-- Active discipline breadcrumb -->
+            <div class="cad-active-filter" id="ed-active-filter">
+              <span class="cad-bc-lbl">Filtrando por:</span>
+              <span class="cad-bc-tag" id="ed-bc-tag"></span>
+              <button class="cad-bc-clear" onclick="EditalEngine.setDiscFilter('all')">✕ Limpar</button>
+            </div>
+
+            <!-- Toolbar: tabs + search + sort -->
+            <div class="cad-toolbar">
+              <div class="edcv-tabs" id="ed-view-toggle-wrap" style="display:flex;gap:6px">
+                <button class="edcv-tab active" data-tab="blocos" onclick="EditalEngine.switchEditalTab('blocos',this)">
+                  <span>⬛</span> Blocos
+                </button>
+                <button class="edcv-tab" data-tab="topicos" onclick="EditalEngine.switchEditalTab('topicos',this)">
+                  <span>📋</span> Tópicos
+                </button>
+              </div>
+              <div class="cad-search-wrap">
+                <span class="cad-search-icon">🔍</span>
+                <input class="cad-search" id="edcv-search" type="text" placeholder="Buscar tópico..."
+                       oninput="EditalEngine.applyFilters()">
+              </div>
+              <div class="cad-sort">
+                <span class="cad-sort-lbl">ORDENAR</span>
+                <button class="cad-sort-chip active" data-filter="sort" data-val="heat"     onclick="EditalEngine.setFilter('sort','heat',this)">🔥 Prioridade</button>
+                <button class="cad-sort-chip"         data-filter="sort" data-val="alpha"    onclick="EditalEngine.setFilter('sort','alpha',this)">A–Z</button>
+                <button class="cad-sort-chip"         data-filter="sort" data-val="progress" onclick="EditalEngine.setFilter('sort','progress',this)">📈 Progresso</button>
+              </div>
+            </div>
+
+            <!-- Status pills (heat + status) -->
+            <div class="cad-toolbar" style="margin-top:-4px">
+              <div class="cad-status-pills">
+                <span class="cad-sort-lbl" style="margin-right:4px">PRIORIDADE</span>
+                <button class="cad-status-pill active"        data-filter="heat" data-val="all" onclick="EditalEngine.setFilter('heat','all',this)"><span class="cad-sp-dot"></span>Todos</button>
+                <button class="cad-status-pill status-pending" data-filter="heat" data-val="5"  onclick="EditalEngine.setFilter('heat','5',this)"><span class="cad-sp-dot"></span>Crítico</button>
+                <button class="cad-status-pill status-reviewed" data-filter="heat" data-val="4"  onclick="EditalEngine.setFilter('heat','4',this)"><span class="cad-sp-dot"></span>Alto</button>
+                <button class="cad-status-pill" data-filter="heat" data-val="3" onclick="EditalEngine.setFilter('heat','3',this)"><span class="cad-sp-dot"></span>Médio</button>
+                <button class="cad-status-pill status-mastered" data-filter="heat" data-val="2"  onclick="EditalEngine.setFilter('heat','2',this)"><span class="cad-sp-dot"></span>Normal</button>
+              </div>
+              <div class="cad-status-pills" style="margin-left:auto">
+                <span class="cad-sort-lbl" style="margin-right:4px">STATUS</span>
+                <button class="cad-status-pill active"            data-filter="status" data-val="all"     onclick="EditalEngine.setFilter('status','all',this)"><span class="cad-sp-dot"></span>Todos</button>
+                <button class="cad-status-pill status-pending"    data-filter="status" data-val="pending" onclick="EditalEngine.setFilter('status','pending',this)"><span class="cad-sp-dot"></span>Pendentes</button>
+                <button class="cad-status-pill status-mastered"   data-filter="status" data-val="done"    onclick="EditalEngine.setFilter('status','done',this)"><span class="cad-sp-dot"></span>Concluídos</button>
+              </div>
+            </div>
+
+            <!-- Content list -->
+            <div id="curriculum-list"></div>
+          </div>
+        </div>
+
+      </div><!-- /edital-configured-view -->
+
+    </div>
+
+    <!-- ═══════════════════ VIEW: FLASHCARDS ═══════════════════ -->
+    <div class="view" id="view-flashcards">
+      <div class="cad-hero" style="margin-bottom:16px;align-items:center">
+        <div class="cad-hero-left">
+          <div class="cad-hero-eyebrow">FERRAMENTA · MEMORIZAÇÃO ATIVA</div>
+          <h1 class="cad-hero-title">FLASHCARDS</h1>
+          <div class="cad-hero-sub">Fixe o conteúdo com repetição espaçada. Quanto mais você pratica, mais a memória consolida.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;flex-shrink:0;align-self:center">
+          <div id="fc-count-badge" style="font-size:10px;font-weight:800;letter-spacing:1px;color:var(--text-dim)">0 CARDS</div>
+          <div style="display:flex;gap:10px">
+            <button class="ciclo-btn-secondary" onclick="Flashcards.toggleAdd()">✏️ Card Manual</button>
+            <button class="ciclo-btn-primary" onclick="FCGenerator.openModal()">✨ Gerar com IA</button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Discipline filter chips -->
+      <!-- Stats bar -->
+      <div class="fc-stats-bar" id="fc-stats-bar"></div>
+      <div class="fc-filters" id="fc-filters"></div>
+
+      <!-- Topic sub-filter (hidden unless discipline selected) -->
+      <div id="fc-topic-filters" style="display:none;margin-bottom:12px">
+        <div style="font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px">Tópicos da disciplina</div>
+        <div id="fc-topic-chips" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+      </div>
+
+      <!-- Filtro por avaliação -->
+      <div class="fc-diff-filter" id="fc-diff-filter">
+        <button class="fc-dff-btn active" data-diff="all"    onclick="Flashcards.filterDiff('all',this)">Todos</button>
+        <button class="fc-dff-btn again"  data-diff="again"  onclick="Flashcards.filterDiff('again',this)">✕ Errei</button>
+        <button class="fc-dff-btn hard"   data-diff="hard"   onclick="Flashcards.filterDiff('hard',this)">😓 Difícil</button>
+        <button class="fc-dff-btn medium" data-diff="medium" onclick="Flashcards.filterDiff('medium',this)">🤔 Ok</button>
+        <button class="fc-dff-btn easy"   data-diff="easy"   onclick="Flashcards.filterDiff('easy',this)">✓ Fácil</button>
+      </div>
+
+      <div class="fc-progress mb-12"><div class="fc-prog-fill" id="fc-prog-fill" style="width:0%"></div></div>
+
+      <!-- Layout: sidebar tópicos + card -->
+      <div class="fc-layout-wrap">
+
+        <!-- Sidebar tópicos (aparece quando disciplina selecionada) -->
+        <div class="fc-topics-sidebar" id="fc-topics-sidebar">
+          <div class="fc-sidebar-hd" id="fc-sidebar-hd">Tópicos</div>
+          <div class="fc-sidebar-scroll" id="fc-sidebar-topics"></div>
+        </div>
+
+        <!-- Coluna principal -->
+        <div class="fc-main-col">
+          <div class="fc-scene">
+            <div style="position:relative">
+              <!-- Edit/Delete action buttons -->
+              <div class="fc-card-actions" id="fc-card-actions">
+                <button class="fc-act-btn" onclick="Flashcards.editCurrent()" title="Editar card">✎</button>
+                <button class="fc-act-btn del" onclick="Flashcards.deleteCurrent()" title="Excluir card">🗑</button>
+              </div>
+              <div class="fc-card" id="fc-card" onclick="Flashcards.flip()">
+                <div class="fc-face fc-front">
+                  <div class="fc-face-label">PERGUNTA</div>
+                  <div class="fc-face-text" id="fc-question">—</div>
+                  <div class="fc-hint">Clique para revelar a resposta</div>
+                </div>
+                <div class="fc-face fc-back">
+                  <div class="fc-face-label">RESPOSTA</div>
+                  <div class="fc-face-text" id="fc-answer">—</div>
+                  <div class="fc-card-meta" id="fc-card-meta"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fc-nav">
+            <button class="fc-btn" onclick="Flashcards.prev()">← Anterior</button>
+            <span class="fc-counter" id="fc-counter">0 / 0</span>
+            <button class="fc-btn" onclick="Flashcards.next()">Próximo →</button>
+          </div>
+
+          <!-- Rating — só aparece após virar o card -->
+          <div class="fc-rating-wrap" id="fc-rating-wrap">
+            <div class="fc-rating-label">Como foi?</div>
+            <div class="fc-rating-row">
+              <button class="fc-rate-btn fc-rate-again" onclick="Flashcards.rate('again')">
+                <span class="fc-rate-icon">✕</span>
+                <span class="fc-rate-txt">Errei</span>
+              </button>
+              <button class="fc-rate-btn fc-rate-hard" onclick="Flashcards.rate('hard')">
+                <span class="fc-rate-icon">😓</span>
+                <span class="fc-rate-txt">Difícil</span>
+              </button>
+              <button class="fc-rate-btn fc-rate-medium" onclick="Flashcards.rate('medium')">
+                <span class="fc-rate-icon">🤔</span>
+                <span class="fc-rate-txt">Ok</span>
+              </button>
+              <button class="fc-rate-btn fc-rate-easy" onclick="Flashcards.rate('easy')">
+                <span class="fc-rate-icon">✓</span>
+                <span class="fc-rate-txt">Fácil</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /fc-layout-wrap -->
+
+
+      <div class="fc-add-form" id="fc-add-form">
+
+        <!-- Matéria + Tópico + Dificuldade -->
+        <div class="fc-form-grid">
+          <div class="field">
+            <label>📚 MATÉRIA</label>
+            <select id="fc-new-subj" onchange="Flashcards.onSubjChange()"></select>
+          </div>
+          <div class="field">
+            <label>🏷️ TÓPICO ESPECÍFICO</label>
+            <div class="fc-topic-wrap">
+              <input type="text" id="fc-new-topic"
+                     placeholder="Digite ou selecione um tópico..."
+                     oninput="Flashcards.onTopicInput(this)"
+                     onfocus="Flashcards.onTopicInput(this)"
+                     onblur="Flashcards.hideAc()"
+                     autocomplete="off">
+              <div class="fc-topic-autocomplete" id="fc-topic-ac"></div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom:12px">
+          <div class="field">
+            <label>⚡ DIFICULDADE INICIAL</label>
+            <select id="fc-new-diff">
+              <option value="1">1 — Fácil</option>
+              <option value="2">2 — Médio</option>
+              <option value="3" selected>3 — Difícil</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Pergunta com richbar -->
+        <div class="field" style="margin-bottom:12px">
+          <label>✏️ PERGUNTA (FRENTE)</label>
+          <div class="fc-richbar">
+            <button class="fc-rb-btn rb-bold"  onmousedown="event.preventDefault();Flashcards.applyMark('fc-new-q','__')">B</button>
+            <div class="fc-rb-sep"></div>
+            <button class="fc-rb-btn rb-gold"  onmousedown="event.preventDefault();Flashcards.applyMark('fc-new-q','==')">◈ Dourado</button>
+            <button class="fc-rb-btn rb-red"   onmousedown="event.preventDefault();Flashcards.applyMark('fc-new-q','!!')">◈ Vermelho</button>
+            <button class="fc-rb-btn rb-green" onmousedown="event.preventDefault();Flashcards.applyMark('fc-new-q','**')">◈ Verde</button>
+            <button class="fc-rb-btn rb-blue"  onmousedown="event.preventDefault();Flashcards.applyMark('fc-new-q','~~')">◈ Azul</button>
+          </div>
+          <textarea class="fc-rich-ta" id="fc-new-q" placeholder="Digite a pergunta. Selecione texto e use os botões acima para colorir..."></textarea>
+        </div>
+
+        <!-- Resposta com richbar -->
+        <div class="field" style="margin-bottom:16px">
+          <label>💡 RESPOSTA (VERSO)</label>
+          <div class="fc-richbar">
+            <button class="fc-rb-btn rb-bold"  onmousedown="event.preventDefault();Flashcards.applyMark('fc-new-a','__')">B</button>
+            <div class="fc-rb-sep"></div>
+            <button class="fc-rb-btn rb-gold"  onmousedown="event.preventDefault();Flashcards.applyMark('fc-new-a','==')">◈ Dourado</button>
+            <button class="fc-rb-btn rb-red"   onmousedown="event.preventDefault();Flashcards.applyMark('fc-new-a','!!')">◈ Vermelho</button>
+            <button class="fc-rb-btn rb-green" onmousedown="event.preventDefault();Flashcards.applyMark('fc-new-a','**')">◈ Verde</button>
+            <button class="fc-rb-btn rb-blue"  onmousedown="event.preventDefault();Flashcards.applyMark('fc-new-a','~~')">◈ Azul</button>
+          </div>
+          <textarea class="fc-rich-ta" id="fc-new-a" placeholder="Digite a resposta completa..."></textarea>
+        </div>
+
+        <div class="row-btns">
+          <button class="btn btn-primary btn-sm" onclick="Flashcards.add()">💾 Salvar Card</button>
+          <button class="btn btn-ghost btn-sm"   onclick="Flashcards.toggleAdd()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ FC EDIT MODAL ══ -->
+    <div class="fc-edit-overlay" id="fc-edit-overlay">
+      <div class="fc-edit-modal">
+        <div class="fc-edit-header">
+          <div class="fc-edit-title">✎ EDITAR FLASHCARD</div>
+          <button class="fc-edit-close" onclick="Flashcards.closeEdit()">✕</button>
+        </div>
+        <div class="field" style="margin-bottom:12px">
+          <label>📚 MATÉRIA</label>
+          <select id="fc-edit-subj" class="fc-rich-ta" style="resize:none;min-height:auto;padding:10px 12px;border-radius:10px"></select>
+        </div>
+        <div class="field" style="margin-bottom:12px">
+          <label>🏷️ TÓPICO</label>
+          <input type="text" id="fc-edit-topic" style="padding:10px 13px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text-primary);font-size:13px;width:100%">
+        </div>
+        <div class="field" style="margin-bottom:12px">
+          <label>✏️ PERGUNTA (FRENTE)</label>
+          <div class="fc-richbar">
+            <button class="fc-rb-btn rb-bold"  onmousedown="event.preventDefault();Flashcards.applyMark('fc-edit-q','__')">B</button>
+            <div class="fc-rb-sep"></div>
+            <button class="fc-rb-btn rb-gold"  onmousedown="event.preventDefault();Flashcards.applyMark('fc-edit-q','==')">◈ Dourado</button>
+            <button class="fc-rb-btn rb-red"   onmousedown="event.preventDefault();Flashcards.applyMark('fc-edit-q','!!')">◈ Vermelho</button>
+            <button class="fc-rb-btn rb-green" onmousedown="event.preventDefault();Flashcards.applyMark('fc-edit-q','**')">◈ Verde</button>
+            <button class="fc-rb-btn rb-blue"  onmousedown="event.preventDefault();Flashcards.applyMark('fc-edit-q','~~')">◈ Azul</button>
+          </div>
+          <textarea class="fc-rich-ta" id="fc-edit-q" style="min-height:110px"></textarea>
+        </div>
+        <div class="field">
+          <label>💡 RESPOSTA (VERSO)</label>
+          <div class="fc-richbar">
+            <button class="fc-rb-btn rb-bold"  onmousedown="event.preventDefault();Flashcards.applyMark('fc-edit-a','__')">B</button>
+            <div class="fc-rb-sep"></div>
+            <button class="fc-rb-btn rb-gold"  onmousedown="event.preventDefault();Flashcards.applyMark('fc-edit-a','==')">◈ Dourado</button>
+            <button class="fc-rb-btn rb-red"   onmousedown="event.preventDefault();Flashcards.applyMark('fc-edit-a','!!')">◈ Vermelho</button>
+            <button class="fc-rb-btn rb-green" onmousedown="event.preventDefault();Flashcards.applyMark('fc-edit-a','**')">◈ Verde</button>
+            <button class="fc-rb-btn rb-blue"  onmousedown="event.preventDefault();Flashcards.applyMark('fc-edit-a','~~')">◈ Azul</button>
+          </div>
+          <textarea class="fc-rich-ta" id="fc-edit-a" style="min-height:110px"></textarea>
+        </div>
+        <div class="fc-edit-footer">
+          <button class="btn btn-ghost btn-sm" onclick="Flashcards.closeEdit()">Cancelar</button>
+          <button class="btn btn-primary btn-sm" onclick="Flashcards.saveEdit()">💾 Salvar Alterações</button>
+        </div>
+      </div>
+    </div>
+
+      <!-- ── FC Cronograma View (cards gerados pelo cronograma) ── -->
+      <div id="fc-cron-view">
+
+  <!-- COMMAND BAR -->
+  <div class="fcron-command-bar">
+    <div class="fcron-title-block">
+      <div class="fcron-title">CARDS DO <span>CRONOGRAMA</span></div>
+      <div class="fcron-sub">gerados dos blocos de estudo</div>
+    </div>
+    <div class="fcron-stats-row" id="fcron-stats"></div>
+    <div class="fcron-search-wrap">
+      <span class="fcron-search-icon">🔍</span>
+      <input class="fcron-search" id="fcron-search" placeholder="Buscar pergunta..."
+             oninput="FCCronView.search(this.value)">
+    </div>
+    <button class="fcron-clear-btn" onclick="FCCronView.clearAll()">✕ Limpar todos</button>
+  </div>
+
+  <!-- FILTER STRIP -->
+  <div class="fcron-filter-strip" id="fcron-filter-strip">
+    <div class="fcron-filter-row">
+      <span class="fcron-filter-label">Matéria</span>
+      <div id="fcron-disc-chips" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+    </div>
+    <div class="fcron-filter-row fcron-topics-row" id="fcron-topic-row" style="display:none">
+      <span class="fcron-filter-label">Tópico</span>
+      <div id="fcron-topic-chips" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+    </div>
+  </div>
+
+  <!-- SORT BAR -->
+  <div class="fcron-sort-bar">
+    <div class="fcron-results-info" id="fcron-results-info"></div>
+    <div class="fcron-sort-btns">
+      <button class="fcron-sort-btn active" id="fcron-sort-recent" onclick="FCCronView.setSort('recent')">Recentes</button>
+      <button class="fcron-sort-btn" id="fcron-sort-diff" onclick="FCCronView.setSort('diff')">Dificuldade</button>
+      <button class="fcron-sort-btn" id="fcron-sort-alpha" onclick="FCCronView.setSort('alpha')">A→Z</button>
+    </div>
+  </div>
+
+  <!-- MAIN CANVAS -->
+  <div class="fcron-canvas" id="fcron-canvas">
+    <!-- sidebar injected by render() -->
+    <!-- card area injected by render() -->
+  </div>
+
+</div>
+
+
+        <!-- ═══════════════════ VIEW: ERRORS ═══════════════════ -->
+    <div class="view" id="view-errors">
+
+      <!-- Hero -->
+      <div class="cad-hero">
+        <div class="cad-hero-left">
+          <div class="cad-hero-eyebrow">FERRAMENTA · ANÁLISE DE LACUNAS</div>
+          <h1 class="cad-hero-title" id="cad-erros-hero-title">CADERNO DE ERROS</h1>
+          <div class="cad-hero-sub">Cada erro mapeado é um ponto a menos perdido na prova. Revise com inteligência.</div>
+        </div>
+        <button class="cad-cta" onclick="Errors.openModal()">
+          <span class="cad-cta-plus">＋</span>
+          <span>REGISTRAR ERRO</span>
+        </button>
+      </div>
+
+      <!-- Stats premium -->
+      <div class="cad-stats" id="err-stats"></div>
+
+      <!-- Repechage banner -->
+      <div class="err-repechage" id="err-repechage" style="display:none">
+        <div class="err-repechage-icon">🔥</div>
+        <div class="err-repechage-text">
+          <div class="err-repechage-title" id="err-repechage-title">Erros acumulados!</div>
+          <div class="err-repechage-sub">Revisar erros pendentes aumenta sua taxa de acerto em até 40%. Não deixe acumular!</div>
+        </div>
+        <button class="err-repechage-btn" onclick="Errors.filterBy('pending')">Ver pendentes →</button>
+      </div>
+
+      <!-- Two-column shell: sidebar matérias + main -->
+      <div class="cad-shell">
+
+        <!-- SIDEBAR: Matérias -->
+        <aside class="cad-side">
+          <div class="cad-side-hd">
+            <span class="cad-side-hd-lbl">MATÉRIAS</span>
+            <span class="cad-side-hd-count" id="cad-side-count">0</span>
+          </div>
+          <div class="cad-side-search-wrap">
+            <span class="cad-side-search-icon">🔎</span>
+            <input class="cad-side-search" id="cad-side-search"
+                   placeholder="Filtrar matéria..."
+                   oninput="Errors.sideSearch(this.value)">
+          </div>
+          <div class="cad-side-list" id="cad-subj-list"></div>
+        </aside>
+
+        <!-- MAIN -->
+        <section class="cad-main">
+
+          <!-- Toolbar -->
+          <div class="cad-toolbar">
+            <div class="cad-search-wrap">
+              <span class="cad-search-icon">🔍</span>
+              <input class="cad-search" id="err-search"
+                     placeholder="Buscar conteúdo, tópico, regra..."
+                     oninput="Errors.search(this.value)">
+            </div>
+            <div class="cad-status-pills" id="err-filters"></div>
+            <div class="cad-sort">
+              <span class="cad-sort-lbl">Ordenar</span>
+              <button class="cad-sort-chip active" id="sort-date"   onclick="Errors.sort('date',this)">Data</button>
+              <button class="cad-sort-chip"        id="sort-subj"   onclick="Errors.sort('subj',this)">Matéria</button>
+              <button class="cad-sort-chip"        id="sort-status" onclick="Errors.sort('status',this)">Status</button>
+            </div>
+          </div>
+
+          <!-- Active filter breadcrumb -->
+          <div class="cad-active-filter" id="cad-active-filter"></div>
+
+          <!-- List -->
+          <div id="errors-list"></div>
+
+        </section>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════ VIEW: REVISÕES ═══════════════════ -->
+    <div class="view" id="view-revisoes">
+      <div id="rev-content"></div>
+    </div>
+
+    <!-- ══ SESSION MODE OVERLAY ══ -->
+    <div class="rev-session-overlay" id="rev-session-overlay">
+      <div class="rev-session-modal">
+
+        <!-- Progress bar -->
+        <div class="rev-session-header">
+          <div class="rev-session-progress-wrap">
+            <div class="rev-session-progress-bar" id="rev-sess-bar"></div>
+          </div>
+          <div class="rev-session-header-row">
+            <div class="rev-session-counter" id="rev-sess-counter">0 / 0</div>
+            <div class="rev-session-type" id="rev-sess-type"></div>
+            <div class="rev-sess-time-est" id="rev-sess-time-est"></div>
+            <button class="rev-session-close" onclick="ReviewSystem.closeSession()">✕ Encerrar</button>
+          </div>
+        </div>
+
+        <!-- Main card -->
+        <div class="rev-session-card" id="rev-sess-card">
+          <div class="rev-sess-card-header">
+            <div class="rev-session-card-type" id="rev-sess-label"></div>
+            <div class="rev-session-card-icon" id="rev-sess-icon">📖</div>
+          </div>
+          <div class="rev-session-card-title" id="rev-sess-title">—</div>
+          <div class="rev-session-card-sub" id="rev-sess-sub"></div>
+          <!-- Content preview (anotações, descrição do bloco) -->
+          <div class="rev-sess-content-box" id="rev-sess-content" style="display:none"></div>
+          <div class="rev-session-card-heat" id="rev-sess-heat" style="display:none"></div>
+        </div>
+
+        <!-- Instructional question -->
+        <div class="rev-session-question" id="rev-sess-question">
+          <span class="rev-sess-q-icon">🤔</span>
+          <span>Como você se saiu com esse conteúdo?</span>
+        </div>
+
+        <!-- Keyboard hint -->
+        <div class="rev-sess-kbd-hint">Use as teclas <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> para responder rapidamente</div>
+
+        <!-- Rating buttons — redesigned -->
+        <div class="rev-session-actions">
+          <button class="rev-sess-btn again"  onclick="ReviewSystem.sessionRate(0)" data-key="1">
+            <div class="rev-sess-btn-icon">✕</div>
+            <div class="rev-sess-btn-label">Errei</div>
+            <div class="rev-sess-btn-effect">Volta amanhã</div>
+            <div class="rev-sess-btn-interval" id="rev-sess-int-0">1d</div>
+            <div class="rev-sess-btn-key">1</div>
+          </button>
+          <button class="rev-sess-btn hard"   onclick="ReviewSystem.sessionRate(1)" data-key="2">
+            <div class="rev-sess-btn-icon">😓</div>
+            <div class="rev-sess-btn-label">Difícil</div>
+            <div class="rev-sess-btn-effect">Precisa reforço</div>
+            <div class="rev-sess-btn-interval" id="rev-sess-int-1">3d</div>
+            <div class="rev-sess-btn-key">2</div>
+          </button>
+          <button class="rev-sess-btn medium" onclick="ReviewSystem.sessionRate(2)" data-key="3">
+            <div class="rev-sess-btn-icon">🤔</div>
+            <div class="rev-sess-btn-label">Lembrei</div>
+            <div class="rev-sess-btn-effect">Bom progresso</div>
+            <div class="rev-sess-btn-interval" id="rev-sess-int-2">7d</div>
+            <div class="rev-sess-btn-key">3</div>
+          </button>
+          <button class="rev-sess-btn easy"   onclick="ReviewSystem.sessionRate(3)" data-key="4">
+            <div class="rev-sess-btn-icon">✓</div>
+            <div class="rev-sess-btn-label">Dominei</div>
+            <div class="rev-sess-btn-effect">Consolidado!</div>
+            <div class="rev-sess-btn-interval" id="rev-sess-int-3">✅</div>
+            <div class="rev-sess-btn-key">4</div>
+          </button>
+        </div>
+
+        <div class="rev-session-tip" id="rev-sess-tip"></div>
+      </div>
+
+      <!-- Session result screen -->
+      <div class="rev-session-result" id="rev-sess-result" style="display:none">
+        <div class="rev-sess-result-icon">🎯</div>
+        <div class="rev-sess-result-title">Sessão Concluída!</div>
+        <div class="rev-sess-result-stats" id="rev-sess-result-stats"></div>
+        <div class="rev-sess-result-msg" id="rev-sess-result-msg"></div>
+        <button class="rev-sess-result-btn" onclick="ReviewSystem.closeSession()">✓ Fechar</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ VIEW: ANALYSIS ═══════════════════ -->
+    <div class="view" id="view-analysis">
+      <div class="section-header mb-16">
+        <div class="section-title" id="analysis-title">DNA da Banca</div>
+        <div class="section-rule"></div>
+        <div class="section-badge" id="analysis-badge">PADRÕES HISTÓRICOS</div>
+      </div>
+      <!-- AI generation banner — shown/hidden by NexusContentAI -->
+      <div id="analysis-ai-banner"></div>
+      <div class="grid-auto mb-20" id="analysis-patterns"></div>
+      <div class="section-header mb-12">
+        <div class="section-title">Por Matéria — Como a Banca Cobra</div>
+        <div class="section-rule"></div>
+      </div>
+      <div class="grid-auto" id="analysis-bysubj"></div>
+    </div>
+
+    <!-- ═══════════════════ VIEW: QUESTÕES (AI) ═══════════════════ -->
+    <div class="view" id="view-questoes">
+      <div id="qx-root"></div>
+    </div>
+
+  </main><!-- /content -->
+</div><!-- /main -->
+
+<!-- ════════════ MODAL: GERAR CRONOGRAMA COM IA ════════════ -->
+<div class="overlay" id="modal-sch-ai">
+  <div class="modal sch-ai-modal" style="max-width:680px;padding:0;display:flex;flex-direction:column;max-height:92vh;">
+
+    <!-- Header -->
+    <div class="sch-ai-hdr">
+      <div class="sch-ai-hdr-icon">🤖</div>
+      <div>
+        <div class="sch-ai-hdr-title">CRONOGRAMA INTELIGENTE</div>
+        <div class="sch-ai-hdr-sub" id="sch-ai-step-label">Configure e gere seu plano personalizado</div>
+      </div>
+      <div class="sch-ai-steps-wrap" id="sch-ai-steps-wrap">
+        <div class="sch-ai-step-dot active" id="sch-dot-1" title="Configurar">1</div>
+        <div class="sch-ai-step-line"></div>
+        <div class="sch-ai-step-dot" id="sch-dot-2" title="Pré-visualizar">2</div>
+        <div class="sch-ai-step-line"></div>
+        <div class="sch-ai-step-dot" id="sch-dot-3" title="Gerar">3</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-sch-ai')" style="position:relative;top:auto;right:auto;margin-left:auto;">✕</button>
+    </div>
+
+    <!-- ══ STEP 1: Formulário inteligente ══ -->
+    <div class="sch-ai-page" id="sch-page-1">
+      <div class="sch-ai-page-inner">
+
+        <!-- Auto-detected data banner -->
+        <div class="sch-ai-detected" id="sch-ai-detected-banner"></div>
+
+        <!-- API Key (collapses if already set) -->
+        <div class="sch-ai-section" id="sch-section-key">
+          <div class="sch-ai-section-hdr" onclick="ScheduleEngine.toggleSection('sch-section-key')">
+            <span class="sch-ai-section-icon">🔑</span>
+            <span class="sch-ai-section-lbl">Chave de API</span>
+            <span class="sch-ai-section-status" id="sch-key-status"></span>
+            <span class="sch-ai-section-chevron">▾</span>
+          </div>
+          <div class="sch-ai-section-body">
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input type="password" id="sch-api-key" placeholder="sk-ant-api03-..."
+                     style="flex:1;" oninput="ScheduleEngine.saveApiKey(this.value)" autocomplete="off">
+              <button class="btn btn-ghost btn-sm" onclick="ScheduleEngine.toggleKeyVisibility()" style="flex-shrink:0;">👁</button>
+            </div>
+            <div style="font-size:10px;color:var(--text-dim);margin-top:5px;">
+              🔒 Salva localmente. <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:var(--gold);">→ Obter chave</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Concurso (auto-fills + collapses if edital exists) -->
+        <div class="sch-ai-section" id="sch-section-concurso">
+          <div class="sch-ai-section-hdr" onclick="ScheduleEngine.toggleSection('sch-section-concurso')">
+            <span class="sch-ai-section-icon">🎯</span>
+            <span class="sch-ai-section-lbl">Concurso</span>
+            <span class="sch-ai-section-status" id="sch-concurso-status"></span>
+            <span class="sch-ai-section-chevron">▾</span>
+          </div>
+          <div class="sch-ai-section-body">
+            <div class="sch-ai-row-2">
+              <div class="field">
+                <label>Concurso alvo *</label>
+                <input type="text" id="sch-ai-exam" placeholder="Ex: Analista TRF, Receita Federal...">
+              </div>
+              <div class="field">
+                <label>Banca organizadora</label>
+                <select id="sch-ai-banca">
+                  <option value="">Livre...</option>
+                  <option>CESPE / CEBRASPE</option><option>FCC</option><option>FGV</option>
+                  <option>VUNESP</option><option>QUADRIX</option><option>IADES</option>
+                  <option>IBFC</option><option>FEPESE</option><option>Outra</option>
+                </select>
+              </div>
+            </div>
+            <div class="sch-ai-row-3">
+              <div class="field">
+                <label>Vagas</label>
+                <input type="number" id="sch-ai-vagas" min="1" placeholder="Ex: 200">
+              </div>
+              <div class="field">
+                <label>Questões na prova</label>
+                <input type="number" id="sch-ai-questoes" min="1" placeholder="Ex: 120">
+              </div>
+              <div class="field">
+                <label>Cargo</label>
+                <input type="text" id="sch-ai-cargo" placeholder="Ex: Oficial PM">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Disponibilidade -->
+        <div class="sch-ai-section" id="sch-section-dispon">
+          <div class="sch-ai-section-hdr" onclick="ScheduleEngine.toggleSection('sch-section-dispon')">
+            <span class="sch-ai-section-icon">⏰</span>
+            <span class="sch-ai-section-lbl">Disponibilidade</span>
+            <span class="sch-ai-section-status" id="sch-dispon-status"></span>
+            <span class="sch-ai-section-chevron">▾</span>
+          </div>
+          <div class="sch-ai-section-body">
+            <div class="sch-ai-row-3">
+              <div class="field">
+                <label>Dias de preparação *</label>
+                <input type="number" id="sch-ai-dias" min="5" max="365" value="30">
+              </div>
+              <div class="field">
+                <label>Horas / dia</label>
+                <input type="number" id="sch-ai-horas" min="1" max="16" step="0.5" placeholder="Ex: 6">
+              </div>
+              <div class="field">
+                <label>Dias / semana</label>
+                <select id="sch-ai-dias-semana">
+                  <option value="7">7 dias</option><option value="6">6 dias</option>
+                  <option value="5" selected>5 dias</option><option value="4">4 dias</option>
+                  <option value="3">3 dias</option>
+                </select>
+              </div>
+            </div>
+            <div class="sch-ai-row-2">
+              <div class="field">
+                <label>Turno preferencial</label>
+                <div class="sch-ai-chips" id="sch-turno-chips">
+                  <button class="sch-chip-btn active" data-val="integral" onclick="ScheduleEngine.selectChip(this,'sch-turno-chips')">🌅 Integral</button>
+                  <button class="sch-chip-btn" data-val="manha" onclick="ScheduleEngine.selectChip(this,'sch-turno-chips')">☀️ Manhã</button>
+                  <button class="sch-chip-btn" data-val="tarde" onclick="ScheduleEngine.selectChip(this,'sch-turno-chips')">🌤 Tarde</button>
+                  <button class="sch-chip-btn" data-val="noite" onclick="ScheduleEngine.selectChip(this,'sch-turno-chips')">🌙 Noite</button>
+                </div>
+              </div>
+              <div class="field">
+                <label>Situação atual</label>
+                <div class="sch-ai-chips" id="sch-trabalho-chips">
+                  <button class="sch-chip-btn active" data-val="nao" onclick="ScheduleEngine.selectChip(this,'sch-trabalho-chips')">📚 Só estudo</button>
+                  <button class="sch-chip-btn" data-val="sim" onclick="ScheduleEngine.selectChip(this,'sch-trabalho-chips')">💼 Trabalho + estudo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Perfil -->
+        <div class="sch-ai-section" id="sch-section-perfil">
+          <div class="sch-ai-section-hdr" onclick="ScheduleEngine.toggleSection('sch-section-perfil')">
+            <span class="sch-ai-section-icon">🧠</span>
+            <span class="sch-ai-section-lbl">Perfil do Candidato</span>
+            <span class="sch-ai-section-status" id="sch-perfil-status"></span>
+            <span class="sch-ai-section-chevron">▾</span>
+          </div>
+          <div class="sch-ai-section-body">
+            <div class="sch-ai-row-2">
+              <div class="field">
+                <label>Nível de conhecimento</label>
+                <div class="sch-ai-chips" id="sch-nivel-chips">
+                  <button class="sch-chip-btn" data-val="iniciante" onclick="ScheduleEngine.selectChip(this,'sch-nivel-chips')">🌱 Iniciante</button>
+                  <button class="sch-chip-btn active" data-val="intermediario" onclick="ScheduleEngine.selectChip(this,'sch-nivel-chips')">📈 Intermediário</button>
+                  <button class="sch-chip-btn" data-val="avancado" onclick="ScheduleEngine.selectChip(this,'sch-nivel-chips')">🔥 Avançado</button>
+                </div>
+              </div>
+              <div class="field">
+                <label>Fez esse concurso antes?</label>
+                <div class="sch-ai-chips" id="sch-fez-chips">
+                  <button class="sch-chip-btn active" data-val="nao" onclick="ScheduleEngine.selectChip(this,'sch-fez-chips')">🆕 Primeira vez</button>
+                  <button class="sch-chip-btn" data-val="sim" onclick="ScheduleEngine.selectChip(this,'sch-fez-chips')">🔄 Já fiz antes</button>
+                </div>
+              </div>
+            </div>
+            <div class="sch-ai-row-2">
+              <div class="field">
+                <label>Objetivo</label>
+                <div class="sch-ai-chips" id="sch-obj-chips">
+                  <button class="sch-chip-btn active" data-val="aprovacao" onclick="ScheduleEngine.selectChip(this,'sch-obj-chips')">✅ Aprovação</button>
+                  <button class="sch-chip-btn" data-val="top10" onclick="ScheduleEngine.selectChip(this,'sch-obj-chips')">🏆 Top 10</button>
+                  <button class="sch-chip-btn" data-val="primeiro" onclick="ScheduleEngine.selectChip(this,'sch-obj-chips')">🥇 1º lugar</button>
+                </div>
+              </div>
+              <div class="field">
+                <label>Fases do cronograma</label>
+                <select id="sch-ai-fases">
+                  <option value="auto">🤖 Automático</option>
+                  <option value="2">2 fases</option><option value="3">3 fases</option>
+                  <option value="4">4 fases</option><option value="5">5 fases</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label>Maior desafio nos estudos</label>
+              <div class="sch-ai-chips sch-ai-chips-wrap" id="sch-desafio-chips">
+                <button class="sch-chip-btn" data-val="concentracao" onclick="ScheduleEngine.toggleChip(this)">😵 Concentração</button>
+                <button class="sch-chip-btn" data-val="memoria" onclick="ScheduleEngine.toggleChip(this)">🧠 Memorização</button>
+                <button class="sch-chip-btn" data-val="tempo" onclick="ScheduleEngine.toggleChip(this)">⏰ Gestão do tempo</button>
+                <button class="sch-chip-btn" data-val="questoes" onclick="ScheduleEngine.toggleChip(this)">📝 Resolver questões</button>
+                <button class="sch-chip-btn" data-val="consistencia" onclick="ScheduleEngine.toggleChip(this)">🔄 Consistência</button>
+                <button class="sch-chip-btn" data-val="revisao" onclick="ScheduleEngine.toggleChip(this)">📖 Revisão</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Disciplinas -->
+        <div class="sch-ai-section" id="sch-section-disc">
+          <div class="sch-ai-section-hdr" onclick="ScheduleEngine.toggleSection('sch-section-disc')">
+            <span class="sch-ai-section-icon">📚</span>
+            <span class="sch-ai-section-lbl">Disciplinas & Prioridades</span>
+            <span class="sch-ai-section-status" id="sch-disc-status"></span>
+            <span class="sch-ai-section-chevron">▾</span>
+          </div>
+          <div class="sch-ai-section-body">
+            <div class="sch-ai-row-2">
+              <div class="field">
+                <label>Pontos fracos <em style="font-weight:400;color:var(--text-dim)">(maior dificuldade)</em></label>
+                <input type="text" id="sch-ai-fracos" placeholder="Ex: DPM, Português...">
+              </div>
+              <div class="field">
+                <label>Pontos fortes <em style="font-weight:400;color:var(--text-dim)">(já domina)</em></label>
+                <input type="text" id="sch-ai-fortes" placeholder="Ex: Constitucional, Inglês...">
+              </div>
+            </div>
+            <div class="field">
+              <label>Foco especial <em style="font-weight:400;color:var(--text-dim)">(opcional)</em></label>
+              <input type="text" id="sch-ai-focus" placeholder="Ex: Dobrar carga de questões na semana 2...">
+            </div>
+          </div>
+        </div>
+
+        <!-- Instruções livres -->
+        <div class="sch-ai-section" id="sch-section-prompt">
+          <div class="sch-ai-section-hdr" onclick="ScheduleEngine.toggleSection('sch-section-prompt')">
+            <span class="sch-ai-section-icon">✍️</span>
+            <span class="sch-ai-section-lbl">Instruções para a IA</span>
+            <span style="font-size:9px;padding:2px 7px;border-radius:10px;background:var(--surface-3);border:1px solid var(--border-default);color:var(--text-dim);margin-left:6px;">POWER USER</span>
+            <span class="sch-ai-section-chevron" style="margin-left:auto;">▾</span>
+          </div>
+          <div class="sch-ai-section-body">
+            <textarea id="sch-ai-custom-prompt" style="width:100%;min-height:100px;padding:12px;background:var(--surface-2);border:1px solid var(--border-strong);border-radius:var(--r-md);color:var(--text-primary);font-size:12px;line-height:1.6;resize:vertical;outline:none;"
+              placeholder="• Não incluir estudos aos domingos, apenas revisão leve&#10;• Intercalar Direito Penal com Processual no mesmo dia&#10;• Blocos de no máximo 2h com intervalo obrigatório&#10;• Incluir simulado aos sábados a partir da 2ª semana"
+              onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border-strong)'"></textarea>
+            <div style="font-size:10px;color:var(--text-dim);margin-top:5px;">💡 Quanto mais específico, mais preciso o cronograma.</div>
+          </div>
+        </div>
+
+      </div><!-- /inner -->
+
+      <!-- Footer step 1 -->
+      <div class="sch-ai-footer">
+        <button class="btn btn-ghost" onclick="closeModal('modal-sch-ai')">Cancelar</button>
+        <div style="flex:1"></div>
+        <button class="btn btn-primary sch-ai-next-btn" onclick="ScheduleEngine.goToPreview()">
+          Ver Pré-visualização →
+        </button>
+      </div>
+    </div>
+
+    <!-- ══ STEP 2: Pré-visualização ══ -->
+    <div class="sch-ai-page" id="sch-page-2" style="display:none;">
+      <div class="sch-ai-page-inner" id="sch-preview-content"></div>
+      <div class="sch-ai-footer">
+        <button class="btn btn-ghost" onclick="ScheduleEngine.goToStep(1)">← Editar</button>
+        <div style="flex:1"></div>
+        <button class="btn btn-primary sch-ai-next-btn" onclick="ScheduleEngine.confirmarGeracao()">
+          🚀 Gerar Cronograma
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- MODAL: Pré-visualização do Cronograma -->
+<div class="overlay" id="modal-sch-preview">
+  <div class="modal sch-preview-modal">
+    <button class="modal-close" onclick="closeModal('modal-sch-preview')" style="top:16px;right:16px;">✕</button>
+
+    <div class="sch-preview-header">
+      <div style="width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,rgba(77,159,255,.2),rgba(77,159,255,.08));border:1px solid rgba(77,159,255,.3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">📊</div>
+      <div>
+        <div style="font-family:var(--font-display);font-size:18px;letter-spacing:2px;color:var(--text-primary);">PRÉ-VISUALIZAÇÃO</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">Revise a distribuição antes de gerar o cronograma definitivo</div>
+      </div>
+    </div>
+
+    <div class="sch-preview-body" id="sch-preview-content">
+      <!-- Filled by showPreview() -->
+    </div>
+
+    <div class="sch-preview-footer">
+      <button class="btn btn-ghost" onclick="closeModal('modal-sch-preview');openModal('modal-sch-ai')">← Editar</button>
+      <div style="flex:1"></div>
+      <button class="btn btn-primary" style="padding:12px 28px;font-size:13px;"
+              onclick="closeModal('modal-sch-preview');ScheduleEngine.gerarCronogramaIA()">
+        🚀 Gerar Cronograma
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════ MODAL: CRIAR CRONOGRAMA MANUAL ════════════ -->
+<div class="overlay" id="modal-sch-manual">
+  <div class="modal modal-wide">
+    <button class="modal-close" onclick="closeModal('modal-sch-manual')">✕</button>
+    <div class="modal-title">✏️ CRIAR CRONOGRAMA MANUAL</div>
+
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:18px;line-height:1.6;">
+      O sistema vai criar a estrutura de fases e dias. Você preenche os blocos de estudo diretamente no cronograma.
+    </p>
+
+    <div class="grid-2">
+      <div class="field">
+        <label>Total de dias de estudo</label>
+        <input type="number" id="man-total-dias" min="3" max="180" value="30">
+      </div>
+      <div class="field">
+        <label>Número de fases</label>
+        <select id="man-num-fases">
+          <option value="2">2 fases</option>
+          <option value="3" selected>3 fases</option>
+          <option value="4">4 fases</option>
+          <option value="5">5 fases</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Começar em</label>
+      <input type="date" id="man-start-date">
+    </div>
+
+    <div style="padding:12px 14px;background:var(--surface-0);border:1px solid var(--border-subtle);border-radius:var(--r-sm);font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.7;">
+      💡 Após criar a estrutura, você poderá adicionar blocos em cada dia clicando em <strong style="color:var(--gold)">+ Adicionar bloco de estudo</strong> diretamente no card do dia.
+    </div>
+
+    <div class="row-btns">
+      <button class="btn btn-primary" onclick="ScheduleEngine.createManualSchedule()">✏️ Criar Estrutura</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-sch-manual')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ MODAL: EDIT SESSION ════════════ -->
+<div class="overlay" id="modal-edit">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-edit')">✕</button>
+    <div class="modal-title">✎ Editar Sessão de Estudo</div>
+    <input type="hidden" id="em-day-id">
+    <input type="hidden" id="em-block-id">
+    <div class="grid-2">
+      <div class="field"><label>Horário</label><input type="text" id="em-time" placeholder="Ex: 07h00 – 09h30"></div>
+      <div class="field">
+        <label>Matéria</label>
+        <select id="em-subj"></select>
+      </div>
+    </div>
+    <div class="field"><label>Tópico / Detalhe</label><input type="text" id="em-detail" placeholder="Ex: Princípios, Excludentes de ilicitude..."></div>
+    <div class="field">
+      <label>Tag</label>
+      <select id="em-tag">
+        <option value="rev">REVISÃO</option>
+        <option value="new">NOVO</option>
+        <option value="sim">SIMULADO</option>
+        <option value="pri">PRIORIDADE</option>
+        <option value="ex">EXERCÍCIOS</option>
+      </select>
+    </div>
+    <div class="row-btns" style="margin-top:16px">
+      <button class="btn btn-primary" onclick="Schedule.saveEdit()">💾 Salvar</button>
+      <button class="btn btn-ghost"   onclick="closeModal('modal-edit')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ MODAL: REGISTER ERROR ════════════ -->
+<div class="overlay" id="modal-error">
+  <div class="modal" style="max-width:620px;border-radius:20px;border:1px solid rgba(232,184,75,.15);background:linear-gradient(160deg,var(--surface-1),var(--surface-0));padding:0;display:flex;flex-direction:column;max-height:90vh;">
+
+    <!-- Header -->
+    <div style="display:flex;align-items:center;gap:12px;padding:20px 22px 14px;border-bottom:1px solid var(--border-subtle);flex-shrink:0;">
+      <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,rgba(255,77,77,.2),rgba(255,77,77,.08));border:1px solid rgba(255,77,77,.25);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✏️</div>
+      <div>
+        <div style="font-family:var(--font-display);font-size:14px;letter-spacing:2px;color:var(--text-primary);">REGISTRAR ERRO</div>
+        <div style="font-size:10px;color:var(--text-dim);margin-top:2px;">Cada erro registrado é uma lacuna fechada</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-error')" style="margin-left:auto;top:auto;right:auto;position:relative;">✕</button>
+    </div>
+
+    <!-- Body (scrollable) -->
+    <div class="err-modal-body">
+
+      <!-- Row 1: Matéria + Motivo -->
+      <div class="grid-2" style="gap:12px;">
+        <div class="field">
+          <label>📚 Matéria</label>
+          <select id="err-subj-sel" style="border-radius:10px;" onchange="Errors.onSubjChange(this)"></select>
+        </div>
+        <div class="field">
+          <label>🎯 Motivo do Erro</label>
+          <select id="err-why-sel" style="border-radius:10px;">
+            <option value="confusao">😵 Confundi conceitos</option>
+            <option value="esqueci">🧠 Esqueci o conteúdo</option>
+            <option value="nunca">📚 Nunca estudei</option>
+            <option value="armadilha">🪤 Caí na armadilha</option>
+            <option value="desatencao">👀 Desatenção</option>
+            <option value="prazo">📅 Confundi prazo/número</option>
+            <option value="lei">⚖️ Lei diferente</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tópico com autocomplete -->
+      <div class="field">
+        <label>🏷️ Tópico Específico</label>
+        <div class="err-topic-wrap">
+          <input type="text" id="err-topic-txt" placeholder="Digite ou selecione o tópico..."
+                 style="border-radius:10px;"
+                 oninput="Errors.onTopicInput(this)"
+                 onfocus="Errors.onTopicInput(this)"
+                 onblur="Errors.hideTopicAc()"
+                 autocomplete="off">
+          <div class="err-topic-ac" id="err-topic-ac"></div>
+        </div>
+      </div>
+
+      <!-- Descrição — Rich Editor -->
+      <div class="field">
+        <label>📝 Descrição da Questão / Conteúdo</label>
+        <div class="rich-editor-wrap" id="rte-q-wrap">
+          <div class="rich-editor-toolbar" id="rte-q-toolbar">
+            <button class="rte-btn" title="Negrito" onclick="Errors.rteCmd('rte-q','bold')"><strong>B</strong></button>
+            <button class="rte-btn" title="Itálico" onclick="Errors.rteCmd('rte-q','italic')"><em>I</em></button>
+            <button class="rte-btn" title="Sublinhado" onclick="Errors.rteCmd('rte-q','underline')"><u>U</u></button>
+            <button class="rte-btn" title="Destaque" onclick="Errors.rteCmd('rte-q','hilite')">🖊</button>
+            <span class="rte-sep"></span>
+            <button class="rte-btn" title="Lista" onclick="Errors.rteCmd('rte-q','ul')">≡</button>
+            <button class="rte-btn" title="Lista numerada" onclick="Errors.rteCmd('rte-q','ol')">1.</button>
+            <button class="rte-btn" title="Citação" onclick="Errors.rteCmd('rte-q','quote')">"</button>
+            <button class="rte-btn" title="Código" onclick="Errors.rteCmd('rte-q','code')">{ }</button>
+            <span class="rte-sep"></span>
+            <select class="rte-select" onchange="Errors.rteFontSize('rte-q',this.value)">
+              <option value="">Tam.</option>
+              <option value="1">Pequeno</option>
+              <option value="3" selected>Normal</option>
+              <option value="5">Grande</option>
+            </select>
+            <span class="rte-sep"></span>
+            <button class="rte-btn" title="Inserir imagem" onclick="Errors.triggerImgUpload('rte-q')">🖼</button>
+            <input type="file" id="rte-q-img-input" accept="image/*" style="display:none" onchange="Errors.insertImgFromFile(this,'rte-q')">
+            <button class="rte-btn" title="Limpar formatação" onclick="Errors.rteCmd('rte-q','removeFormat')" style="font-size:11px;">✕f</button>
+          </div>
+          <div class="rich-editor-content" id="rte-q" contenteditable="true"
+               data-placeholder="Descreva brevemente o tema ou questão que errou..."
+               onpaste="Errors.onPaste(event,'rte-q')"
+               ondragover="event.preventDefault()"
+               ondrop="Errors.onDrop(event,'rte-q')"></div>
+        </div>
+      </div>
+
+      <!-- Regra — Rich Editor Gold -->
+      <div class="field">
+        <label style="color:var(--gold);">📌 Regra / Resposta Correta</label>
+        <div class="rich-editor-wrap gold" id="rte-rule-wrap">
+          <div class="rich-editor-toolbar" id="rte-rule-toolbar">
+            <button class="rte-btn" title="Negrito" onclick="Errors.rteCmd('rte-rule','bold')"><strong>B</strong></button>
+            <button class="rte-btn" title="Itálico" onclick="Errors.rteCmd('rte-rule','italic')"><em>I</em></button>
+            <button class="rte-btn" title="Sublinhado" onclick="Errors.rteCmd('rte-rule','underline')"><u>U</u></button>
+            <button class="rte-btn" title="Destaque ouro" onclick="Errors.rteCmd('rte-rule','hilite')">⭐</button>
+            <span class="rte-sep"></span>
+            <button class="rte-btn" onclick="Errors.rteCmd('rte-rule','ul')">≡</button>
+            <button class="rte-btn" onclick="Errors.rteCmd('rte-rule','ol')">1.</button>
+            <button class="rte-btn" title="Código" onclick="Errors.rteCmd('rte-rule','code')">{ }</button>
+            <span class="rte-sep"></span>
+            <button class="rte-btn" title="Inserir imagem" onclick="Errors.triggerImgUpload('rte-rule')">🖼</button>
+            <input type="file" id="rte-rule-img-input" accept="image/*" style="display:none" onchange="Errors.insertImgFromFile(this,'rte-rule')">
+            <button class="rte-btn" onclick="Errors.rteCmd('rte-rule','removeFormat')" style="font-size:11px;">✕f</button>
+          </div>
+          <div class="rich-editor-content" id="rte-rule" contenteditable="true"
+               data-placeholder="Escreva a regra, artigo ou conceito que precisa memorizar..."
+               style="border-color:rgba(232,184,75,.2);background:rgba(232,184,75,.02);"
+               onpaste="Errors.onPaste(event,'rte-rule')"
+               ondragover="event.preventDefault()"
+               ondrop="Errors.onDrop(event,'rte-rule')"></div>
+        </div>
+      </div>
+
+      <!-- Programar revisão SM-2 -->
+      <label class="err-autorev" for="err-auto-rev">
+        <input type="checkbox" id="err-auto-rev">
+        <div class="err-autorev-text">
+          <strong>🔁 Programar revisão automática (SM-2)</strong>
+          <span>Adiciona este erro à fila de revisão espaçada para reforçar a memória</span>
+        </div>
+      </label>
+
+    </div><!-- /err-modal-body -->
+
+    <!-- Footer -->
+    <div class="err-modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('modal-error')">Cancelar</button>
+      <div style="flex:1"></div>
+      <button class="btn btn-primary" onclick="Errors.save()"
+              style="background:linear-gradient(135deg,#7A5E1F,var(--gold));border:none;color:#0a0e1a;font-size:12px;font-weight:800;cursor:pointer;letter-spacing:.8px;box-shadow:0 4px 16px rgba(232,184,75,.3);">
+        💾 Salvar no Caderno
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════ MODAL: CONFIG ════════════ -->
+<div class="overlay" id="modal-config">
+  <div class="modal" style="max-width:480px;border-radius:18px">
+    <button class="modal-close" onclick="closeModal('modal-config')">✕</button>
+    <div class="modal-title">⚙ Configurar Concurso</div>
+    <div class="field"><label>Nome do Concurso</label><input type="text" id="cfg-name" placeholder="Ex: PMPB 2025, Receita Federal, TRF..."></div>
+    <div class="field"><label>Banca Organizadora</label><input type="text" id="cfg-board" placeholder="Ex: CESPE/CEBRASPE, FCC, VUNESP..."></div>
+    <div class="field"><label>Data da Prova</label><input type="date" id="cfg-date"></div>
+    <div class="field"><label>Total de Dias de Preparação</label><input type="number" id="cfg-days" placeholder="Ex: 25" min="5" max="365"></div>
+    <div class="field"><label>Data de Início do Estudo</label><input type="date" id="cfg-start"></div>
+    <div class="row-btns" style="margin-top:16px">
+      <button class="btn btn-primary" onclick="Config.save()">💾 Salvar Configuração</button>
+      <button class="btn btn-ghost"   onclick="closeModal('modal-config')">Cancelar</button>
+    </div>
+
+    <!-- Cache section -->
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border-subtle)">
+      <div style="font-size:10px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px">🛠 Manutenção</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:12px">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--text-muted)">🗑 Limpar Cache</div>
+          <div style="font-size:10px;color:var(--text-dim);margin-top:3px;line-height:1.5">Remove dados temporários e flags de versão.<br>Seus erros, sessões, flashcards e edital são preservados.</div>
+        </div>
+        <button
+          onclick="Config.clearCache()"
+          style="flex-shrink:0;padding:9px 16px;border-radius:10px;border:1px solid rgba(255,140,66,.3);background:rgba(255,140,66,.08);color:var(--orange);font-size:11px;font-weight:800;cursor:pointer;letter-spacing:.5px;transition:all .15s;white-space:nowrap"
+          onmouseover="this.style.background='rgba(255,140,66,.18)';this.style.borderColor='var(--orange)'"
+          onmouseout="this.style.background='rgba(255,140,66,.08)';this.style.borderColor='rgba(255,140,66,.3)'">
+          Limpar Cache
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ─ App Modules: defer = HTML renders before JS parses ─ -->
+<script src="js/app.js" defer></script>
+<script src="js/theme_init.js" defer></script>
+
+<!-- ════════════ FAB — Botão Cronômetro ════════════ -->
+<!-- ════════════ FAB ════════════ -->
+<button class="timer-fab-btn" id="timer-fab-main" onclick="StudyTimer.openFullscreen()">
+  <div class="timer-fab-icon">⏱</div>
+  <span class="timer-fab-label" id="timer-fab-label">Cronômetro</span>
+  <div class="timer-fab-badge" id="timer-fab-badge"></div>
+</button>
+
+<!-- ════════════ TIMER FULL-SCREEN ════════════ -->
+<div class="timer-fullscreen" id="timer-fullscreen">
+  <div class="timer-fullscreen-card">
+
+    <!-- Header -->
+    <div class="timer-fs-header">
+      <div class="timer-fs-badge" id="timer-mode-badge">⏱ Cronômetro</div>
+      <div class="timer-fs-actions">
+        <button class="timer-cancel-btn" id="timer-cancel-btn"
+                onclick="StudyTimer.cancelTimer()" title="Cancelar sem salvar">✕ Cancelar</button>
+        <button class="timer-fs-btn minimize" onclick="StudyTimer.minimize()" title="Minimizar">⊟</button>
+        <button class="timer-fs-btn close-btn" onclick="StudyTimer.closeAndReset()" title="Fechar e resetar cronômetro">✕</button>
+      </div>
+    </div>
+
+    <!-- Active discipline pill -->
+    <div class="timer-active-disc" id="timer-active-disc"></div>
+
+    <!-- Mode tabs -->
+    <div class="timer-mode-tabs">
+      <button class="timer-mode-tab active" id="tmtab-crono" onclick="StudyTimer.setMode('crono')">⏱ Cronômetro</button>
+      <button class="timer-mode-tab"        id="tmtab-timer" onclick="StudyTimer.setMode('timer')">⏳ Timer</button>
+      <button class="timer-mode-tab"        id="tmtab-pomo"  onclick="StudyTimer.setMode('pomo')">🍅 Pomodoro</button>
+    </div>
+
+    <!-- Duration chips (Timer/Pomo) -->
+    <div class="timer-duration-row" id="timer-dur-row" style="display:none">
+      <button class="timer-dur-chip active" onclick="StudyTimer.setDuration(25,this)">25 min</button>
+      <button class="timer-dur-chip"        onclick="StudyTimer.setDuration(45,this)">45 min</button>
+      <button class="timer-dur-chip"        onclick="StudyTimer.setDuration(60,this)">1h</button>
+      <button class="timer-dur-chip"        onclick="StudyTimer.setDuration(90,this)">90 min</button>
+      <div class="timer-dur-custom">
+        <input type="number" id="timer-custom-min" min="1" max="480" placeholder="min"
+               onchange="StudyTimer.setDuration(this.value,null)">
+        <span>min</span>
+      </div>
+    </div>
+
+    <!-- SVG ring + digits -->
+    <div class="timer-ring-wrap">
+      <svg class="timer-ring-svg" viewBox="0 0 220 220">
+        <circle class="timer-ring-track" cx="110" cy="110" r="96"/>
+        <circle class="timer-ring-fill"  cx="110" cy="110" r="96" id="timer-ring-fill"/>
+      </svg>
+      <div class="timer-digits" id="timer-digits">00:00</div>
+    </div>
+
+    <!-- Pomodoro session dots -->
+    <div class="timer-session-info" id="pomo-info" style="display:none">
+      <div id="pomo-label">Sessão 1 de 4 · Foco</div>
+      <div class="timer-session-dots" id="pomo-dots"></div>
+    </div>
+
+    <!-- Running info -->
+    <div class="timer-session-info" id="timer-running-info" style="padding-bottom:4px"></div>
+
+    <!-- Controls -->
+    <div class="timer-controls">
+      <button class="timer-ctrl-btn play-pause" id="timer-play-btn"
+              onclick="StudyTimer.togglePlay()">▶ Iniciar</button>
+      <button class="timer-ctrl-btn stop-btn" id="timer-stop-btn"
+              onclick="StudyTimer.stopTimer()">■ Registrar</button>
+    </div>
+
+    <!-- Hidden compat progress bar -->
+    <div class="timer-progress-track" id="timer-prog-track" style="display:none">
+      <div class="timer-progress-fill" id="timer-prog-fill" style="width:100%"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════ MINI-PLAYER ════════════ -->
+<div class="timer-mini" id="timer-mini" onclick="StudyTimer.openFullscreen()">
+  <div class="timer-mini-mode" id="timer-mini-mode">⏱</div>
+  <div class="timer-mini-body">
+    <div class="timer-mini-time"  id="timer-mini-time">00:00</div>
+    <div class="timer-mini-label" id="timer-mini-label">Cronômetro</div>
+  </div>
+  <div class="timer-mini-actions" onclick="event.stopPropagation()">
+    <button class="timer-mini-btn play"   id="timer-mini-play" onclick="StudyTimer.togglePlay()" title="Play/Pause">▶</button>
+    <button class="timer-mini-btn expand" onclick="StudyTimer.openFullscreen()" title="Expandir">⤢</button>
+  </div>
+</div>
+
+<!-- ════════════ TIMER ALERT ════════════ -->
+<div class="timer-alert" id="timer-alert">
+  <div class="timer-alert-icon">🎉</div>
+  <div class="timer-alert-title" id="alert-title">SESSÃO CONCLUÍDA!</div>
+  <div class="timer-alert-sub"   id="alert-sub">Hora de registrar seus estudos</div>
+  <div class="timer-alert-btns">
+    <button class="btn btn-primary" onclick="StudyTimer.alertToRegistro()">📝 Registrar Estudo</button>
+    <button class="btn btn-ghost"   onclick="StudyTimer.dismissAlert()">Continuar depois</button>
+  </div>
+</div>
+
+<!-- ════════════ REGISTRO DE ESTUDO ════════════ -->
+<div class="reg-overlay" id="reg-overlay">
+  <div class="reg-modal">
+    <div class="reg-header">
+      <div class="reg-header-icon">📝</div>
+      <div class="reg-header-info">
+        <div class="reg-title">REGISTRO DE ESTUDO</div>
+        <div class="reg-subtitle" id="reg-subtitle">Nova sessão de estudo</div>
+      </div>
+      <button class="reg-close" onclick="StudyTimer.closeRegistro()" title="Fechar">✕</button>
+    </div>
+
+    <div class="reg-body">
+
+      <!-- DATA -->
+      <div class="reg-section-card reg-sec-data">
+        <div class="reg-section-label">📅 Data</div>
+        <div class="reg-date-tabs" id="reg-date-tabs">
+          <button class="reg-date-tab active" data-val="hoje"  onclick="StudyTimer.setRegDate('hoje',this)">📅 Hoje</button>
+          <button class="reg-date-tab"        data-val="ontem" onclick="StudyTimer.setRegDate('ontem',this)">⬅ Ontem</button>
+          <button class="reg-date-tab"        data-val="outro" onclick="StudyTimer.setRegDate('outro',this)">📆 Outro</button>
+        </div>
+        <div id="reg-date-custom" style="display:none" class="reg-date-picker-wrap">
+          <div class="reg-date-input-row" onclick="StudyTimer.toggleDatePicker()">
+            <span id="reg-date-display">dd/mm/aaaa</span>
+            <span class="reg-date-cal-icon">📅</span>
+          </div>
+          <input type="hidden" id="reg-date-hidden" value="">
+          <div id="reg-date-cal" class="reg-date-cal" style="display:none"></div>
+        </div>
+      </div>
+
+      <!-- TEMPO -->
+      <div class="reg-section-card reg-sec-tempo">
+        <div class="reg-section-label">⏱ Tempo de estudo</div>
+        <div class="reg-time-wrap">
+          <div class="reg-time-display" id="reg-time-display" onclick="StudyTimer.openTimePicker()">00:00:00</div>
+          <span class="reg-time-edit-icon" onclick="StudyTimer.openTimePicker()" style="cursor:pointer">✎</span>
+        </div>
+      </div>
+
+      <!-- CONTEÚDO — spans 2 cols, internal 2x2 grid -->
+      <div class="reg-section-card reg-sec-content">
+        <div class="reg-section-label">📚 Conteúdo</div>
+        <div class="reg-content-grid">
+          <!-- Row 1: Disciplina | Tópico -->
+          <div class="reg-field">
+            <label>Disciplina *</label>
+            <select id="reg-disciplina" onchange="StudyTimer.onDiscChange(this)">
+              <option value="">Selecione a disciplina...</option>
+            </select>
+          </div>
+          <div class="reg-field">
+            <label>Tópico</label>
+            <select id="reg-topico-sel" class="reg-topico-sel" onchange="StudyTimer.onTopicoChange(this)">
+              <option value="">Selecione o tópico...</option>
+            </select>
+            <input type="hidden" id="reg-topico" value="">
+          </div>
+          <!-- Row 2: Categoria | Material -->
+          <div class="reg-field">
+            <label>🏷️ Categoria</label>
+            <select id="reg-categoria" onchange="StudyTimer.onCategoriaChange(this)">
+              <option value="">Selecione...</option>
+              <option value="Teoria">Teoria</option>
+              <option value="Revisão">Revisão</option>
+              <option value="Questões">Questões</option>
+              <option value="__nova__">+ Nova Categoria</option>
+            </select>
+            <div class="reg-categoria-custom-wrap" id="reg-categoria-custom-wrap">
+              <input type="text" id="reg-categoria-custom" placeholder="Nova categoria..."
+                     onkeydown="if(event.key==='Enter') StudyTimer.saveCategoriaCustom()">
+            </div>
+            <div class="reg-cat-tags" id="reg-cat-tags"></div>
+          </div>
+          <div class="reg-field">
+            <label>Material / Referência</label>
+            <input type="text" id="reg-material" placeholder="Ex: Aula 01, Livro pág. 50, PDF Cap. 3...">
+          </div>
+        </div>
+      </div>
+
+      <!-- STATUS -->
+      <div class="reg-section-card reg-sec-status">
+        <div class="reg-section-label">✅ Status</div>
+        <div class="reg-toggle-row">
+          <label class="reg-toggle" id="toggle-teoria" onclick="StudyTimer.toggleCheck('reg-teoria','toggle-teoria','checked-teoria')">
+            <input type="checkbox" id="reg-teoria">
+            <div class="reg-toggle-knob"></div>
+            <span class="reg-toggle-label">✅ Teoria Finalizada</span>
+          </label>
+          <label class="reg-toggle" id="toggle-revisao" onclick="StudyTimer.toggleCheck('reg-revisao','toggle-revisao','checked-revisao')">
+            <input type="checkbox" id="reg-revisao">
+            <div class="reg-toggle-knob"></div>
+            <span class="reg-toggle-label">🔄 Programar Revisão</span>
+          </label>
+        </div>
+        <div class="reg-rev-days-wrap" id="reg-rev-days-wrap">
+          <div class="reg-rev-days-label">PROGRAMAR REVISÕES</div>
+          <div class="reg-rev-days-chips" id="reg-rev-days-chips"></div>
+          <div class="reg-rev-days-custom-wrap" id="reg-rev-days-custom-wrap">
+            <input type="number" id="reg-rev-days-custom" min="1" max="365" placeholder="dias (ex: 45)" />
+            <button type="button" class="reg-rev-days-confirm" onclick="StudyTimer.addRevDayCustom()">Adicionar</button>
+            <button type="button" class="reg-rev-days-cancel"  onclick="StudyTimer.toggleRevDayCustom(false)">✕</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUESTÕES — agora ao lado de Status -->
+      <div class="reg-section-card reg-sec-questoes">
+        <div class="reg-section-label">🎯 Questões</div>
+        <div class="reg-row-2">
+          <div class="reg-field">
+            <label>Acertos</label>
+            <div class="reg-stepper acertos">
+              <button class="reg-stepper-btn minus" onclick="StudyTimer.stepNum('reg-acertos',-1)">−</button>
+              <input type="number" id="reg-acertos" min="0" value="0" oninput="StudyTimer.updateTaxa()">
+              <button class="reg-stepper-btn plus"  onclick="StudyTimer.stepNum('reg-acertos',+1)">+</button>
+            </div>
+          </div>
+          <div class="reg-field">
+            <label>Erros</label>
+            <div class="reg-stepper erros">
+              <button class="reg-stepper-btn minus" onclick="StudyTimer.stepNum('reg-erros',-1)">−</button>
+              <input type="number" id="reg-erros" min="0" value="0" oninput="StudyTimer.updateTaxa()">
+              <button class="reg-stepper-btn plus"  onclick="StudyTimer.stepNum('reg-erros',+1)">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="reg-taxa-bar"><div class="reg-taxa-fill" id="reg-taxa-fill" style="width:0%"></div></div>
+        <div class="reg-taxa-label" id="reg-taxa-label">Nenhuma questão registrada</div>
+      </div>
+
+      <!-- PÁGINAS -->
+      <div class="reg-section-card reg-sec-paginas">
+        <div class="reg-section-label">📖 Páginas</div>
+        <div class="reg-row-2">
+          <div class="reg-field">
+            <label>Início</label>
+            <input type="number" id="reg-pag-ini" min="0" value="0" class="reg-num-box">
+          </div>
+          <div class="reg-field">
+            <label>Fim</label>
+            <input type="number" id="reg-pag-fim" min="0" value="0" class="reg-num-box">
+          </div>
+        </div>
+      </div>
+
+      <!-- VIDEOAULAS -->
+      <div class="reg-section-card reg-sec-video">
+        <div class="reg-section-label">🎥 Videoaulas</div>
+        <div class="reg-video-list" id="reg-video-list"></div>
+        <button class="reg-video-add" onclick="StudyTimer.addVideoItem()">
+          <span style="font-size:14px;font-weight:800">+</span> Adicionar videoaula
+        </button>
+      </div>
+
+      <!-- ANOTAÇÕES — span 2 cols -->
+      <div class="reg-section-card reg-sec-anotacoes">
+        <div class="reg-section-label">💬 Anotações</div>
+        <div class="reg-field">
+          <textarea id="reg-comentarios" rows="2"
+                    placeholder="Dificuldades encontradas, insights, pontos para revisar..."></textarea>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="reg-footer">
+      <label class="reg-save-new">
+        <input type="checkbox" id="reg-save-new">
+        <span>Salvar e registrar novo</span>
+      </label>
+      <div class="reg-footer-actions">
+        <button class="reg-btn-cancel" onclick="StudyTimer.closeRegistro()">Cancelar</button>
+        <button class="reg-btn-save"   onclick="StudyTimer.saveRegistro()">💾 Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- ════════════ TIME PICKER MODAL ════════════ -->
+<div class="reg-time-picker-overlay" id="reg-tp-overlay">
+  <div class="reg-time-picker-modal">
+    <div class="reg-tp-title">⏱ Quanto tempo você estudou?</div>
+
+    <!-- Presets rápidos -->
+    <div class="reg-tp-presets">
+      <button class="reg-tp-preset" onclick="StudyTimer.tpSetTime(0,30)">30 min</button>
+      <button class="reg-tp-preset" onclick="StudyTimer.tpSetTime(1,0)">1h</button>
+      <button class="reg-tp-preset" onclick="StudyTimer.tpSetTime(1,30)">1h30</button>
+      <button class="reg-tp-preset" onclick="StudyTimer.tpSetTime(2,0)">2h</button>
+      <button class="reg-tp-preset" onclick="StudyTimer.tpSetTime(2,30)">2h30</button>
+      <button class="reg-tp-preset" onclick="StudyTimer.tpSetTime(3,0)">3h</button>
+      <button class="reg-tp-preset" onclick="StudyTimer.tpSetTime(4,0)">4h</button>
+      <button class="reg-tp-preset" onclick="StudyTimer.tpSetTime(5,0)">5h</button>
+    </div>
+
+    <!-- Spinner H : M : S -->
+    <div class="reg-tp-row">
+      <div class="reg-tp-col">
+        <div class="reg-tp-label">Horas</div>
+        <div class="reg-tp-spin">
+          <button class="reg-tp-arrow" onclick="StudyTimer.tpStep('h',1)">▲</button>
+          <div class="reg-tp-val" id="tp-h">00</div>
+          <button class="reg-tp-arrow" onclick="StudyTimer.tpStep('h',-1)">▼</button>
+        </div>
+      </div>
+      <div class="reg-tp-sep">:</div>
+      <div class="reg-tp-col">
+        <div class="reg-tp-label">Minutos</div>
+        <div class="reg-tp-spin">
+          <button class="reg-tp-arrow" onclick="StudyTimer.tpStep('m',5)">▲</button>
+          <div class="reg-tp-val" id="tp-m">00</div>
+          <button class="reg-tp-arrow" onclick="StudyTimer.tpStep('m',-5)">▼</button>
+        </div>
+      </div>
+      <div class="reg-tp-sep">:</div>
+      <div class="reg-tp-col">
+        <div class="reg-tp-label">Segundos</div>
+        <div class="reg-tp-spin">
+          <button class="reg-tp-arrow" onclick="StudyTimer.tpStep('s',10)">▲</button>
+          <div class="reg-tp-val" id="tp-s">00</div>
+          <button class="reg-tp-arrow" onclick="StudyTimer.tpStep('s',-10)">▼</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="reg-tp-actions">
+      <button class="reg-tp-cancel" onclick="StudyTimer.closeTimePicker()">Cancelar</button>
+      <button class="reg-tp-confirm" onclick="StudyTimer.confirmTimePicker()">✓ Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ FC AI GENERATOR MODULE ════════════ -->
+<script src="js/fc_gen.js" defer></script>
+
+<!-- ════════════ NEXUS CONTENT AI ════════════ -->
+<script src="js/content_ai.js" defer></script>
+
+<!-- ════════════ FC CRONOGRAMA VIEW ════════════ -->
+<script src="js/fc_cron.js" defer></script>
+
+<!-- ════════════ QUESTÕES AI MODULE ════════════ -->
+<script src="js/questoes.js" defer></script>
+
+
+<!-- ── FC Generator Modal ── -->
+<div class="fc-gen-overlay" id="fc-gen-overlay">
+  <div class="fc-gen-modal">
+
+    <!-- Header -->
+    <div class="fc-gen-header">
+      <div class="fc-gen-header-icon">✦</div>
+      <div class="fc-gen-header-text">
+        <div class="fc-gen-title">GERAR FLASHCARDS</div>
+        <div class="fc-gen-subtitle">IA gera cards no padrão do sistema com destaques coloridos</div>
+      </div>
+      <button class="fc-gen-minimize" onclick="FCGenerator.minimize()" title="Minimizar">—</button>
+      <button class="fc-gen-close" onclick="FCGenerator.close()">✕</button>
+    </div>
+
+    <!-- Body -->
+    <div class="fc-gen-body" id="fc-gen-body">
+
+      <!-- Loading state (hidden initially) -->
+      <div class="fc-gen-loading" id="fc-gen-loading">
+        <div class="fc-gen-loading-ring"></div>
+        <div class="fc-gen-loading-msg" id="fc-gen-loading-msg">Conectando à IA...</div>
+        <div class="fc-gen-loading-sub">Gerando flashcards personalizados para o seu concurso</div>
+      </div>
+
+      <!-- Result strip (hidden initially) -->
+      <div class="fc-gen-result-strip" id="fc-gen-result-strip">
+        <div class="fc-gen-result-count" id="fc-gen-result-count">0</div>
+        <div class="fc-gen-result-info" id="fc-gen-result-info">cards gerados e adicionados ao baralho</div>
+        <button onclick="FCGenerator.close()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(46,204,113,0.3);background:rgba(46,204,113,0.1);color:var(--green);font-size:11px;font-weight:700;cursor:pointer;">✓ Ver Cards</button>
+      </div>
+
+      <!-- ── Seção 1: Disciplina + Tópico ── -->
+      <div class="fc-gen-section-lbl">📚 Matéria e Assunto</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+        <div class="field">
+          <label>Disciplina *</label>
+          <select id="fc-gen-disc" onchange="FCGenerator.onDiscChange(this)"
+            style="padding:9px 12px;background:var(--surface-2);border:1px solid var(--border-strong);border-radius:var(--r-sm);color:var(--text-primary);font-family:var(--font-body);font-size:12px;outline:none;width:100%">
+            <option value="">Selecione a matéria...</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Tópico / Assunto</label>
+          <select id="fc-gen-topic"
+            style="padding:9px 12px;background:var(--surface-2);border:1px solid var(--border-strong);border-radius:var(--r-sm);color:var(--text-primary);font-family:var(--font-body);font-size:12px;outline:none;width:100%">
+            <option value="">Todos os tópicos da disciplina</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ── Seção 2: Quantidade ── -->
+      <div class="fc-gen-section-lbl">🔢 Quantidade de Cards</div>
+      <div class="fc-gen-qty-row" id="fc-gen-qty-row" style="margin-bottom:16px">
+        <button class="fc-gen-qty-btn" data-qty="5"  onclick="FCGenerator.setQty(5,this)">5</button>
+        <button class="fc-gen-qty-btn active" data-qty="10" onclick="FCGenerator.setQty(10,this)">10</button>
+        <button class="fc-gen-qty-btn" data-qty="15" onclick="FCGenerator.setQty(15,this)">15</button>
+        <button class="fc-gen-qty-btn" data-qty="20" onclick="FCGenerator.setQty(20,this)">20</button>
+        <button class="fc-gen-qty-btn" data-qty="30" onclick="FCGenerator.setQty(30,this)">30</button>
+        <button class="fc-gen-qty-btn" data-qty="50" onclick="FCGenerator.setQty(50,this)">50</button>
+      </div>
+
+      <!-- ── Seção 4: Dificuldade ── -->
+      <div class="fc-gen-section-lbl">⚡ Nível de Dificuldade</div>
+      <div class="fc-gen-diff-row" id="fc-gen-diff-row" style="margin-bottom:16px">
+        <button class="fc-gen-diff-chip d1" data-diff="1" onclick="FCGenerator.setDiff(1,this)">🟢 Fácil<br><span style="font-size:9px;opacity:0.7">Conceitos básicos</span></button>
+        <button class="fc-gen-diff-chip d2" data-diff="2" onclick="FCGenerator.setDiff(2,this)">🟡 Médio<br><span style="font-size:9px;opacity:0.7">Aplicação e análise</span></button>
+        <button class="fc-gen-diff-chip d3" data-diff="3" onclick="FCGenerator.setDiff(3,this)">🔴 Difícil<br><span style="font-size:9px;opacity:0.7">Pegadinhas da banca</span></button>
+        <button class="fc-gen-diff-chip active" data-diff="mix" onclick="FCGenerator.setDiff('mix',this)">🎲 Misto<br><span style="font-size:9px;opacity:0.7">Todos os níveis</span></button>
+      </div>
+
+      <!-- ── Seção 5: Foco / Instrução extra ── -->
+      <div class="fc-gen-section-lbl">✍️ Foco Específico <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:10px;color:var(--text-dim)">(opcional)</span></div>
+      <textarea class="fc-gen-focus-ta" id="fc-gen-focus"
+        style="margin-bottom:16px"
+        placeholder="Exemplos:
+• Focar nos prazos e artigos literais que a banca costuma cobrar
+• Gerar perguntas no estilo CESPE (certo ou errado)
+• Priorizar as pegadinhas mais comuns sobre este tema
+• Incluir mnemônicos para facilitar a memorização"></textarea>
+
+      <!-- ── Seção 6: Estilo da banca ── -->
+      <div class="fc-gen-section-lbl">🏛️ Estilo de Questão</div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px" id="fc-gen-estilo-row">
+        <button class="fc-gen-qty-btn active" data-estilo="cespe" onclick="FCGenerator.setEstilo('cespe',this)" style="width:auto;padding:6px 12px;font-size:11px;font-family:var(--font-body)">CESPE</button>
+        <button class="fc-gen-qty-btn" data-estilo="multipla" onclick="FCGenerator.setEstilo('multipla',this)" style="width:auto;padding:6px 12px;font-size:11px;font-family:var(--font-body)">Múltipla Escolha</button>
+        <button class="fc-gen-qty-btn" data-estilo="conceito" onclick="FCGenerator.setEstilo('conceito',this)" style="width:auto;padding:6px 12px;font-size:11px;font-family:var(--font-body)">Conceitual</button>
+        <button class="fc-gen-qty-btn" data-estilo="pratico" onclick="FCGenerator.setEstilo('pratico',this)" style="width:auto;padding:6px 12px;font-size:11px;font-family:var(--font-body)">Prático / Caso</button>
+      </div>
+
+    </div><!-- /fc-gen-body -->
+
+    <!-- Footer -->
+    <div class="fc-gen-footer">
+      <button class="fc-gen-btn-cancel" onclick="FCGenerator.close()">Cancelar</button>
+      <button class="fc-gen-btn-generate" id="fc-gen-btn" onclick="FCGenerator.generate()">
+        ✦ GERAR FLASHCARDS
+      </button>
+    </div>
+
+  </div>
+</div>
+
+</body>
+
+</body>
+</html>

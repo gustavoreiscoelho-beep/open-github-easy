@@ -12,4 +12,12 @@ export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
   },
+  vite: {
+    server: {
+      watch: {
+        // observa arquivos em public/ que o Vite normalmente ignora
+        ignored: (path: string) => path.includes('node_modules'),
+      },
+    },
+  },
 });

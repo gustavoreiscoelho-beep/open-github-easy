@@ -9,6 +9,8 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { AuthProvider } from "@/hooks/useAuth";
+import { Toaster } from "sonner";
 
 function NotFoundComponent() {
   return (
@@ -73,13 +75,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { name: "description", content: "Configura Fácil simplifies system configuration and data management with a premium user interface." },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:description", content: "Configura Fácil simplifies system configuration and data management with a premium user interface." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Lovable App" },
+      { name: "twitter:description", content: "Configura Fácil simplifies system configuration and data management with a premium user interface." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9fd8e5bc-cb01-4dd4-a747-a0d05acd5f2d/id-preview-73459fe3--e7fdb60f-e416-4da2-a616-bdaebd633183.lovable.app-1778352531929.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9fd8e5bc-cb01-4dd4-a747-a0d05acd5f2d/id-preview-73459fe3--e7fdb60f-e416-4da2-a616-bdaebd633183.lovable.app-1778352531929.png" },
     ],
     links: [
       {
@@ -113,7 +119,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <AuthProvider>
+        <Outlet />
+        <Toaster position="top-center" theme="dark" richColors />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

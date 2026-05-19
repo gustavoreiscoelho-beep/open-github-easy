@@ -1,26 +1,27 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Navigate } from "@tanstack/react-router";
+import { useAuth } from "@/hooks/useAuth";
+import { NexusFrame } from "@/components/NexusFrame";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
 function Index() {
-  return <PlaceholderIndex />;
+  const { session, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div style={{
+        position: "fixed", inset: 0, display: "grid", placeItems: "center",
+        background: "#0a0a0c", color: "#9a9aa3",
+        fontFamily: "'IBM Plex Sans',system-ui,sans-serif", fontSize: 13, letterSpacing: 1,
+      }}>
+        CARREGANDO...
+      </div>
+    );
+  }
+
+  if (!session) return <Navigate to="/login" />;
+
+  return <NexusFrame />;
 }
